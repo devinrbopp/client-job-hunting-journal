@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Task from './Task';
 
 function JobDetail (props) {
+
+    /*
+        const jobDisplay = () => {
+            find which job is clicked
+            display that job from the state (props.jobs.x)
+        }
+    */
     return ( 
         <div>
             <h1>This is job detail Page</h1>

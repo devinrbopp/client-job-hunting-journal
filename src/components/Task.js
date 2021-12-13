@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
 function Task (props) {
+
+/*    
+    declare state
+    const [task, setTask] = useState([])
+    
+    function to add task to state
+    const addTask = () => {
+        add a task 
+        setTask(/et task = dropdown thing)
+     }
+*/
+
     return (
         <div>
             <h3>Task name</h3>
