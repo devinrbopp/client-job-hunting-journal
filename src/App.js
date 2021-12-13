@@ -1,5 +1,5 @@
 // import React, { Component, Fragment } from 'react'
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
@@ -17,6 +17,25 @@ import Jobs from './components/Jobs'
 import JobDetail from './components/JobDetail'
 
 const App = () => {
+
+	//define state for jobs
+	//define helper function for inputting fields
+	//helper function for saved jobs
+	const [jobs, setJobs] = useState([])
+	const [profile, setProfile] = useState([])
+
+	const newJob = (e) => {
+		setJobs()
+		//set the fields of the job to the inputs 
+	}
+
+	const newProfile = () => {
+		setProfile()
+		//profile creation function
+	}
+
+	
+
 
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
