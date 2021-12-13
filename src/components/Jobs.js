@@ -18,10 +18,6 @@ function Jobs (props) {
                 <input type="text" name="zipCode" id="zipCode"  />
             </div>
             <div>
-                <label htmlFor="tasks">Tasks </label>
-                <input type="text" name="tasks" id="tasks"  />
-            </div>
-            <div>
                 <label htmlFor="jobDescription">Job Description </label>
                 <input type="text" name="jobDescription" id="jobDescription"  />
             </div>
