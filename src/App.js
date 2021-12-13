@@ -14,6 +14,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Profile from './components/Profile'
 import Jobs from './components/Jobs'
+import JobDetail from './components/JobDetail'
 
 const App = () => {
 
@@ -78,6 +79,11 @@ const App = () => {
 					path='/jobs'
 					element={< Jobs />}
 				/>
+				<Route
+					path='/job-detail'
+					element={< JobDetail />}
+				/>
+				
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert

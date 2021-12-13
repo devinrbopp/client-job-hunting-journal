@@ -1,5 +1,5 @@
-import userEvent from '@testing-library/user-event';
 import React, { useState, useEffect } from 'react';
+import Task from './Task';
 
 
 function Profile (props) {
@@ -19,9 +19,7 @@ function Profile (props) {
                  <li>props.user.techStack</li>
              </ul>
             <p>prop.lastEnteredJob</p>
-            <ul>
-
-            </ul>
+             <Task/>
 
         </div>
     )
