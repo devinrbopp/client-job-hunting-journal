@@ -33,10 +33,7 @@ const App = () => {
 		setProfile()
 		//profile creation function
 	}
-
 	
-
-
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
 

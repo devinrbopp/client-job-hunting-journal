@@ -3,6 +3,24 @@ import JobCard from './JobCard';
 
 function Jobs (props) {
 
+    const [newJob, setNewJob] = useState([])
+
+    /*handleChange{
+        setNewJob({ ...newJob, [e.target.name]: e.target.value })
+    }
+
+    handleCheck{
+        setNewJob({ ...newJob, [e.target.name]: e.target.checked }) (? not sure if this is right)
+        
+    }
+    handleSubmit{
+        add newJob to Job state array
+        API call to post
+        reset new job to empty values
+    }
+    */
+
+
     return(
         <div className="container-div">
             <div>
