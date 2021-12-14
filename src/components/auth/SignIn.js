@@ -42,7 +42,9 @@ const SignIn = (props) => {
 					variant: 'success',
 				})
 			)
-			.then(() => navigate('/'))
+			.then(() => {
+                navigate('/')
+            })
 			.catch((error) => {
                 setEmail('')
                 setPassword('')
@@ -53,6 +55,8 @@ const SignIn = (props) => {
 				})
 			})
 	}
+
+
 
     return (
         <div className='row'>
