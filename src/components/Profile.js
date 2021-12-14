@@ -6,15 +6,19 @@ function Profile(props) {
 
     //map(dueDate) function {
     // for all due dates, pick the closest 5
+    // query dates.sort
+    // return first 5
+    /* 
+    */
     //}
 
  /*let content;
 
     if (profile === null){
-        show profile creation form
+        return profile creation form
         set content = form
     } else {
-        show profile
+        return profile
         set content to actual profile
         <h1>Profile Page</h1>
 
