@@ -23,6 +23,15 @@ const App = () => {
 	//helper function for saved jobs
 	const [jobs, setJobs] = useState([])
 	const [profile, setProfile] = useState([])
+	const [user, setUser] = useState(null)
+	const [msgAlerts, setMsgAlerts] = useState([])
+	const [currentProfile, setCurrentProfile] = useState({
+        name: '',
+        skills: [],
+        zipCode: '',
+        interviewQuestions: {},
+        owner: ''
+    })
 
 	const newJob = (e) => {
 		setJobs()
@@ -34,8 +43,6 @@ const App = () => {
 		//profile creation function
 	}
 	
-	const [user, setUser] = useState(null)
-	const [msgAlerts, setMsgAlerts] = useState([])
 
 	console.log('user in app', user)
 	console.log('message alerts', msgAlerts)
@@ -59,6 +66,27 @@ const App = () => {
 		})
 	}
 
+	const getProfile = () => {
+		if (user != null) {
+			fetch(`http://localhost:8000/profiles/${user._id}`)
+			.then(profile => {
+				console.log('PROFILE RETRIEVED FROM SERVER')
+				return profile.json()
+			})
+			.then(profile =>{
+				console.log('this is profile:', profile)
+				setCurrentProfile(profile)
+				return 'complete'
+			})
+			.catch(error => console.log(error))
+		}
+	}
+
+	useEffect(() => {
+		console.log('i am about to run getProfile')
+		getProfile()
+	}, [user])
+
 	return (
 		<Fragment>
 			<Header user={user} />
@@ -70,7 +98,7 @@ const App = () => {
 				/>
 				<Route
 					path='/sign-in'
-					element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
+					element={<SignIn msgAlert={msgAlert} setUser={setUser} getProfile={getProfile}/>}
 				/>
 				<Route
 					path='/sign-out'
@@ -89,7 +117,8 @@ const App = () => {
 				/>
 				<Route
 					path='/profile'
-					element={< Profile />}
+					element={< Profile user={user} currentProfile={currentProfile} getProfile={getProfile} />}
+					
 				/>
 				<Route
 					path='/jobs'
