@@ -122,7 +122,7 @@ const App = () => {
 				/>
 				<Route
 					path='/jobs'
-					element={< Jobs />}
+					element={< Jobs user={user}/>}
 				/>
 				<Route
 					path='/job-detail'
