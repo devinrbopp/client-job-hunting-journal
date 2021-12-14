@@ -33,6 +33,8 @@ const App = () => {
         owner: ''
     })
 
+
+
 	const newJob = (e) => {
 		setJobs()
 		//set the fields of the job to the inputs 
@@ -66,6 +68,7 @@ const App = () => {
 		})
 	}
 
+	// get the current user's profile and save it in state
 	const getProfile = () => {
 		if (user != null) {
 			fetch(`http://localhost:8000/profiles/${user._id}`)
@@ -75,16 +78,37 @@ const App = () => {
 			})
 			.then(profile =>{
 				console.log('this is profile:', profile)
-				setCurrentProfile(profile)
+				setCurrentProfile(profile[0])
 				return 'complete'
 			})
 			.catch(error => console.log(error))
 		}
 	}
 
+	// get the current user's jobs and save them in state
+	const getJobs = () => {
+		if (user != null) {
+			fetch('http://localhost:8000/jobs/user', {
+				headers: {
+					'Authorization': 'Bearer ' + user.token
+				}
+			})
+				.then(jobs => {
+					console.log('JOBS RETRIEVED FROM SERVER', jobs)
+					return jobs.json()
+				})
+				.then(jobs => {
+					console.log('this is jobs: ', jobs)
+					setJobs(jobs)
+				})
+				.catch(error => console.log(error))
+		}
+	}
+
 	useEffect(() => {
 		console.log('i am about to run getProfile')
 		getProfile()
+		getJobs()
 	}, [user])
 
 	return (
@@ -122,7 +146,7 @@ const App = () => {
 				/>
 				<Route
 					path='/jobs'
-					element={< Jobs />}
+					element={< Jobs user={user}/>}
 				/>
 				<Route
 					path='/job-detail'
