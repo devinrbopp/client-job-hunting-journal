@@ -11,6 +11,25 @@ function Profile(props) {
         interviewQuestions: {},
         owner: props.user._id
     })
+    const [currentProfile, setCurrentProfile] = useState({
+        name: '',
+        skills: [],
+        zipCode: '',
+        interviewQuestions: {},
+        owner: props.user._id
+    })
+
+    useEffect(()=> {
+        fetch(`http://localhost:8000/profiles/${props.user._id}`)
+        .then(profile => {
+            return profile.json()
+        })
+        .then(profile =>{
+            console.log('this is profile:', profile)
+            setCurrentProfile(profile)
+        })
+        .catch(error => console.log(error))
+    }, [])
 
     const handleChange = (e) => {
         setNewProfile({...newProfile, [e.target.name]: e.target.value})
@@ -96,6 +115,12 @@ function Profile(props) {
                 </div>
                 <input type="submit" value="submit" />
             </form>
+            <div>
+                <h2>{currentProfile[0].name}</h2>
+                <h3>{currentProfile[0].skills.join(", ")}</h3>
+                <h3>{currentProfile[0].zipCode}</h3>
+                <h3>{currentProfile[0].interviewQuestions}</h3>
+            </div>
         </div>
     )
 }
