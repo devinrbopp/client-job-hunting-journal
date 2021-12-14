@@ -78,7 +78,7 @@ const App = () => {
 			})
 			.then(profile =>{
 				console.log('this is profile:', profile)
-				setCurrentProfile(profile)
+				setCurrentProfile(profile[0])
 				return 'complete'
 			})
 			.catch(error => console.log(error))
