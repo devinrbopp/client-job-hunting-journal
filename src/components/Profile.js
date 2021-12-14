@@ -4,6 +4,52 @@ import Task from './Task';
 
 function Profile(props) {
 
+    const [newProfile, setNewProfile] = useState({
+        name: '',
+        skills: [],
+        zipCode: '',
+        interviewQuestions: {},
+        owner: props.user._id
+    })
+
+    const handleChange = (e) => {
+        setNewProfile({...newProfile, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let preJSONBody = {
+            name: newProfile.name,
+            skills: newProfile.skills,
+            zipCode: newProfile.zipCode,
+            interviewQuestions: newProfile.interviewQuestions,
+            owner: newProfile.owner
+        }
+        fetch('http://localhost:8000/profiles', {
+            method: 'POST',
+            body: JSON.stringify(preJSONBody),
+            headers: { 'Content-Type': 'application/JSON'}
+        })
+        .then(response => response.json())
+        .then(() => {
+            setNewProfile({
+                name: '',
+                skills: [],
+                zipCode: '',
+                interviewQuestions: {},
+                owner: props.user._id
+            })
+        })
+        .catch(error => { console.log(error) })
+    }
+ 
+    // START OF EDIT 
+    // useEffect(() => {
+    //     setNewProfile({
+    //         name: 
+    //     })
+    // })
+    
     //map(dueDate) function {
     // for all due dates, pick the closest 5
     //}
@@ -35,7 +81,21 @@ function Profile(props) {
 
     return (
         <div>
-           {/* content variable */}
+            <form onSubmit={handleSubmit} >
+                <div>
+                    <label htmlFor="name">Name</label>
+                    <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name} />
+                </div>
+                <div>
+                    <label htmlFor="skills">Skills</label>
+                    <input onChange={handleChange} type="text" name="skills" id="skills" value={newProfile.skills} />
+                </div>
+                <div>
+                    <label htmlFor="zipCode">Zip Code</label>
+                    <input onChange={handleChange} type="text" name="zipCode" id="zipCode" value={newProfile.zipCode} />
+                </div>
+                <input type="submit" value="submit" />
+            </form>
         </div>
     )
 }
