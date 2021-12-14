@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Task from './Task';
 
 
-function Profile(props) {
-
+function Profile(props) {    
+    console.log('THIS IS THE CURRENT PROFILE: ', props.currentProfile)
     const [newProfile, setNewProfile] = useState({
         name: '',
         skills: [],
@@ -11,25 +11,7 @@ function Profile(props) {
         interviewQuestions: {},
         owner: props.user._id
     })
-    const [currentProfile, setCurrentProfile] = useState({
-        name: '',
-        skills: [],
-        zipCode: '',
-        interviewQuestions: {},
-        owner: props.user._id
-    })
-
-    useEffect(()=> {
-        fetch(`http://localhost:8000/profiles/${props.user._id}`)
-        .then(profile => {
-            return profile.json()
-        })
-        .then(profile =>{
-            console.log('this is profile:', profile)
-            setCurrentProfile(profile)
-        })
-        .catch(error => console.log(error))
-    }, [])
+        
 
     const handleChange = (e) => {
         setNewProfile({...newProfile, [e.target.name]: e.target.value})
@@ -58,10 +40,41 @@ function Profile(props) {
                 interviewQuestions: {},
                 owner: props.user._id
             })
+            props.getProfile()
         })
         .catch(error => { console.log(error) })
     }
- 
+    let display 
+    if (props.currentProfile.length === 0) {
+        display = (
+            <form onSubmit={handleSubmit} >
+                <div>
+                    <label htmlFor="name">Name</label>
+                    <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name} />
+                </div>
+                <div>
+                    <label htmlFor="skills">Skills</label>
+                    <input onChange={handleChange} type="text" name="skills" id="skills" value={newProfile.skills} />
+                </div>
+                <div>
+                    <label htmlFor="zipCode">Zip Code</label>
+                    <input onChange={handleChange} type="text" name="zipCode" id="zipCode" value={newProfile.zipCode} />
+                </div>
+                <input type="submit" value="submit" />
+            </form>
+        )
+    } else {
+        display = (
+            <div>
+                <h1>profile</h1>
+                <h2>{props.currentProfile[0].name}</h2>
+                <h3>{props.currentProfile[0].skills.join(", ")}</h3>
+                <h3>{props.currentProfile[0].zipCode}</h3>
+                <h3>{props.currentProfile[0].interviewQuestions}</h3>
+            </div>
+        )
+    }
+
     // START OF EDIT 
     // useEffect(() => {
     //     setNewProfile({
@@ -100,27 +113,7 @@ function Profile(props) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} >
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name} />
-                </div>
-                <div>
-                    <label htmlFor="skills">Skills</label>
-                    <input onChange={handleChange} type="text" name="skills" id="skills" value={newProfile.skills} />
-                </div>
-                <div>
-                    <label htmlFor="zipCode">Zip Code</label>
-                    <input onChange={handleChange} type="text" name="zipCode" id="zipCode" value={newProfile.zipCode} />
-                </div>
-                <input type="submit" value="submit" />
-            </form>
-            <div>
-                <h2>{currentProfile[0].name}</h2>
-                <h3>{currentProfile[0].skills.join(", ")}</h3>
-                <h3>{currentProfile[0].zipCode}</h3>
-                <h3>{currentProfile[0].interviewQuestions}</h3>
-            </div>
+            {display}
         </div>
     )
 }
