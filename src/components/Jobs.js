@@ -70,19 +70,19 @@ function Jobs (props) {
             <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="jobTitle">Job Title: </label>
-                <input type="text" name="jobTitle" id="jobTitle" onChange={handleChange} />
+                <input type="text" name="jobTitle" id="jobTitle" onChange={handleChange} value={newJob.jobTitle}/>
             </div>
             <div>
                 <label htmlFor="company">Company: </label>
-                <input type="text" name="company" id="company" onChange={handleChange} />
+                <input type="text" name="company" id="company" onChange={handleChange} value={newJob.company} />
             </div>
             <div>
                 <label htmlFor="zipCode">Zip Code: </label>
-                <input type="text" name="zipCode" id="zipCode" onChange={handleChange}  />
+                <input type="text" name="zipCode" id="zipCode" onChange={handleChange}  value={newJob.zipCode}/>
             </div>
             <div>
                 <label htmlFor="jobDescription">Job Description: </label>
-                <input type="text" name="jobDescription" id="jobDescription" onChange={handleChange} />
+                <input type="text" name="jobDescription" id="jobDescription" onChange={handleChange} value={newJob.jobDescription}/>
             </div>
             <div>
                 <label htmlFor="applied">Applied </label>
