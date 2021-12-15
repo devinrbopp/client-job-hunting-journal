@@ -6,7 +6,8 @@ function JobCard (props) {
 
     return (
         <div className="JobCard-container">
-            <h1>JobCard</h1>
+            <h1>{props.job.jobTitle} - {props.job.company}</h1>
+            <p>Applied: {props.job.applied ? 'Yes' : 'No'}</p>
         </div>
     )
 }

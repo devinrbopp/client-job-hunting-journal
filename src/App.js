@@ -146,7 +146,7 @@ const App = () => {
 				/>
 				<Route
 					path='/jobs'
-					element={< Jobs user={user}/>}
+					element={< Jobs user={user} jobs={jobs} getJobs={getJobs} />}
 				/>
 				<Route
 					path='/job-detail'
