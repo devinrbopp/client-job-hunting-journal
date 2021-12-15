@@ -4,10 +4,10 @@ function Task(props) {
 
     // Declare all states
     const [taskArray, setTaskArray] = useState([])
-    const [taskList, setTaskList] = useState([{ task: 'Submit resume', date: '', notes: '' },
-    { task: 'Interview Prep', date: '', notes: '' },
-    { task: 'New thing', date: '', notes: '' }])
-    const [newTask, setNewTask] = useState({ task: '', date: '', notes: '' })
+    const [taskList, setTaskList] = useState([{ taskName: 'Submit resume', deadline: '', notes: '' },
+    { taskName: 'Interview Prep', deadline: '', notes: '' },
+    { taskName: 'New thing', deadline: '', notes: '' }])
+    const [newTask, setNewTask] = useState({ taskName: '', deadline: '', notes: '' })
 
     const handleSelect = (e) => {
         e.preventDefault()
@@ -19,33 +19,45 @@ function Task(props) {
         e.preventDefault()
         console.log('this is e', e)
         console.log("submit button clicked", e.target.value)
+        console.log('this is jobId', props.jobId)
         setTaskArray((previousTask) => [...taskArray, newTask])
-        // let preJSONBody = {
-        //     task: newTask.task,
-        //     date: newTask.date,
-        //     notes: newTask.notes
-        // }
-        // fetch('http://localhost:8000/tasks/:jobId', { //change jobId to prop.jobId after job page completed
-        //     method: 'POST',
-        //     body: JSON.stringify(preJSONBody),
-        //     headers: { 'Content-Type': 'application/JSON'}
-        // })
-        // .then(response => {
-        //     console.log(response.json())
-        // })
-        // .catch(error => { console.log(error) })
+        let preJSONBody = {
+            taskName: newTask.taskName,
+            deadline: newTask.deadline,
+            notes: newTask.notes
+        }
+        console.log('This is preJSONBody: ', preJSONBody)
+        fetch(`http://localhost:8000/tasks/${props.jobId}`, { //change jobId to prop.jobId after job page completed
+            method: 'POST',
+            body: JSON.stringify(preJSONBody),
+            headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
+        })
+        .then(response => {
+            console.log(response.json())
+        })
+        .catch(error => { console.log(error) })
     }
-    const tasks = taskArray.map(task => {
+
+    const getTask = () => {
+        fetch(`http://localhost:8000/tasks`, {
+            headers: { 'Content-Type': 'application/JSON' }
+        })
+        .then(tasks => {
+            console.log('this is tasks: ', tasks)
+        })
+    }
+
+    const tasks = taskArray.map(taskName => {
         return (
             <div>
-                <h1>{task.task}</h1>
+                <h1>{taskName.taskName}</h1>
                 <h2>Deadline:</h2>
                     {/* 
                     Need to npm i @material-ui/core for this to work
                     <TextField
-                        id="date"
+                        id= deadline"
                         label="Choose your deadline"
-                        type="date"
+                        type= deadline"
                         InputLabelProps={{
                             shrink: true,
                         }}
@@ -63,16 +75,16 @@ function Task(props) {
     return (
         <div>
             <form onChange={handleSelect}>
-                <select name="task-dropdown">
+                <select name="taskName-dropdown">
                     <option value="null">--Select a Task--</option>
-                    <option value={0}>{taskList[0].task}</option>
-                    <option value={1}>{taskList[1].task}</option>
-                    <option value={2}>{taskList[2].task}</option>
+                    <option value={0}>{taskList[0].taskName}</option>
+                    <option value={1}>{taskList[1].taskName}</option>
+                    <option value={2}>{taskList[2].taskName}</option>
                 </select>
-                <button type="submit" value={`${newTask.task}`} onClick={handleSubmit}>Add Task</button>
+                <button type="submit" value={`${newTask.taskName}`} onClick={handleSubmit}>Add Task</button>
             </form>
             <div className='added-tasks'>
-                <p>You selected: {newTask.task}</p>
+                <p>You selected: {newTask.taskName}</p>
             </div>
             <div>
                 {tasks}
