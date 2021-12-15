@@ -4,7 +4,7 @@ import Task from './Task';
 
 
 function Profile(props) {    
-    console.log('THIS IS THE CURRENT PROFILE: ', props.currentProfile)
+
     const [newProfile, setNewProfile] = useState({
         name: '',
         skills: [],
