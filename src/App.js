@@ -18,9 +18,9 @@ import JobDetail from './components/JobDetail'
 
 const App = () => {
 
-	//define state for jobs
-	//define helper function for inputting fields
-	//helper function for saved jobs
+    /************************************
+	 *          DEFINE STATES           *
+	 ************************************/
 	const [jobs, setJobs] = useState([])
 	const [profile, setProfile] = useState([])
 	const [user, setUser] = useState(null)
@@ -32,19 +32,8 @@ const App = () => {
         interviewQuestions: {},
         owner: ''
     })
-
-
-
-	const newJob = (e) => {
-		setJobs()
-		//set the fields of the job to the inputs 
-	}
-
-	const newProfile = () => {
-		setProfile()
-		//profile creation function
-	}
 	
+
 
 	console.log('user in app', user)
 	console.log('message alerts', msgAlerts)
@@ -68,49 +57,59 @@ const App = () => {
 		})
 	}
 
-	// get the current user's profile and save it in state
+	/*****************************************
+	 * FUNCTION TO GET USER PROFILE FROM DB  *
+	 *****************************************/	
 	const getProfile = () => {
 		if (user != null) {
-			fetch(`http://localhost:8000/profiles/${user._id}`)
+			fetch(`http://localhost:8000/profiles/${user._id}`) // Fetch request into db using userId as a param
 			.then(profile => {
 				console.log('PROFILE RETRIEVED FROM SERVER')
 				return profile.json()
 			})
 			.then(profile =>{
 				console.log('this is profile:', profile)
-				setCurrentProfile(profile[0])
+				setCurrentProfile(profile[0]) 				// set current profile to the profile retrieved from fetch req
 				return 'complete'
 			})
 			.catch(error => console.log(error))
 		}
 	}
 
-	// get the current user's jobs and save them in state
+	/**********************************************
+	 * FUNCTION TO GET USER'S SAVED JOBS FROM DB  *
+	 **********************************************/	
 	const getJobs = () => {
 		if (user != null) {
-			fetch('http://localhost:8000/jobs/user', {
+			fetch('http://localhost:8000/jobs/user', {		// Fetch req to get the job
 				headers: {
-					'Authorization': 'Bearer ' + user.token
+					'Authorization': 'Bearer ' + user.token // Requires user to be signed in
 				}
 			})
 				.then(jobs => {
 					console.log('JOBS RETRIEVED FROM SERVER', jobs)
-					return jobs.json()
+					return jobs.json()						// Retrieve the fetched jobs from API call
 				})
 				.then(jobs => {
 					console.log('this is jobs: ', jobs)
-					setJobs(jobs)
+					setJobs(jobs)							// Set jobs state to jobs retrieved
 				})
 				.catch(error => console.log(error))
 		}
 	}
 
+	/************************************************
+	 * HOOK TO RUN FUNCTIONS WHENEVER USER LOGS IN  *
+	 ************************************************/	
 	useEffect(() => {
 		console.log('i am about to run getProfile')
 		getProfile()
 		getJobs()
 	}, [user])
 
+	/*******************************
+	 * RENDER PAGES AND SET ROUTES *
+	 *******************************/	
 	return (
 		<Fragment>
 			<Header user={user} />
