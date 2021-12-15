@@ -35,7 +35,6 @@ function JobDetail(props) {
         content = (
             <>
                 <div className="job-description-div">
-                    {form}
                     <p>{currentJob[0].jobTitle}</p>
                     <p>{currentJob[0].company}</p>
                     <p>{currentJob[0].jobDescription}</p>
