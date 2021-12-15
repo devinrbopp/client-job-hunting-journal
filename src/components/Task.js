@@ -40,6 +40,20 @@ function Task(props) {
         .catch(error => { console.log(error) })
     }
 
+    const markAsCompleted = (e) => {
+        let preJSONBody ={
+            completed: true
+        }
+        console.log('e.target!', e._id)
+        fetch(`http://localhost:8000/tasks/${props.jobId}/${e._id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(preJSONBody),
+            headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
+        })
+        .then(() => props.getJobs())
+        .catch(error => console.log(error))
+    }
+
     const tasks = props.tasks.map(task => {
         return (
             <div>
@@ -56,7 +70,7 @@ function Task(props) {
                         }}
                     /> */}
                     <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
-                    <h2>Completed: {task.completed ? 'Yes!' : 'No!'}</h2>
+                    <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
 
             </div>
         )
