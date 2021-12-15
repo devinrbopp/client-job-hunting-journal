@@ -22,7 +22,7 @@ function Profile(props) {
 	 *********************/	
 
     const editProfile = (e) => {
-        setEdit(true)                       //Set edit state to true on click
+        setEdit(true)                       // Set edit state to true on click
     }
     
     const handleChange = (e) => {
@@ -32,32 +32,32 @@ function Profile(props) {
 	 * FUNCTION TO SET EDIT PROFILE  *
 	 *********************************/	
     const handleEdit = (e) => {
-        e.preventDefault()                                      //Prevent refresh
+        e.preventDefault()                                      // Prevent refresh
         // console.log('this is currentProfile.owner: ', props.currentProfile.owner)
         // console.log('this is user._id: ', props.user._id)
-        let preJSONBody = {                         //send data to the API in this object form
+        let preJSONBody = {                         // Send data to the API in this object form
             name: newProfile.name,
             skills: newProfile.skills,
             zipCode: newProfile.zipCode,
             interviewQuestions: newProfile.interviewQuestions,
             owner: props.currentProfile.owner      // Assigns a user to profile
         }
-        fetch(`http://localhost:8000/profiles/${props.currentProfile._id}`, {       //Fetch request to update profile
+        fetch(`http://localhost:8000/profiles/${props.currentProfile._id}`, {       // Fetch request to update profile
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
         .then(() => {
             console.log('is this hitting?')
-            setNewProfile({             //Reset profile state to empty state
+            setNewProfile({             // Reset profile state to empty state
                 name: '',
                 skills: [],
                 zipCode: '',
                 interviewQuestions: {},
                 owner: props.user._id
             })
-            setEdit(false)             //Set edit to false so edit form no longer shows
-            props.getProfile()        //Call getProfile function to show info
+            setEdit(false)             // Set edit to false so edit form no longer shows
+            props.getProfile()        // Call getProfile function to show info
         })
         .catch(error => { console.log(error) })
     }

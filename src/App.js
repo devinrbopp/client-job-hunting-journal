@@ -69,7 +69,7 @@ const App = () => {
 			})
 			.then(profile =>{
 				console.log('this is profile:', profile)
-				setCurrentProfile(profile[0]) 				// set current profile to the profile retrieved from fetch req
+				setCurrentProfile(profile[0]) 				// Set current profile to the profile retrieved from fetch req
 				return 'complete'
 			})
 			.catch(error => console.log(error))
@@ -92,7 +92,7 @@ const App = () => {
 				})
 				.then(jobs => {
 					console.log('this is jobs: ', jobs)
-					setJobs(jobs)							// Set jobs state to jobs retrieved
+					setJobs(jobs)							// Sett jobs state to jobs retrieved
 				})
 				.catch(error => console.log(error))
 		}

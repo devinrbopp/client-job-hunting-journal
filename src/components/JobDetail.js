@@ -4,29 +4,32 @@ import { useParams } from 'react-router-dom'
 import JobForm from './JobForm';
 
 function JobDetail(props) {
+    /******************
+	 * DEFINE STATES  *
+	 ******************/
     const [jobTasks, setJobTasks] = useState([])
     const [editForm, setEditForm] = useState(false)
 
 
 
-    let id = useParams().id
+    let id = useParams().id                 // Get url parameter
     console.log('THIS IS THE ID', id)
 
-    let currentJob = props.jobs.filter(job => {
+    let currentJob = props.jobs.filter(job => { // Filter through job array to get the job selected
         return job._id === id
     })
 
-    const editToggle = () => {
+    const editToggle = () => {                  // Function to set edit form to T/F
         editForm ? setEditForm(false) : setEditForm(true)
     }
 
     let content
 
-    if (editForm) {
+    if (editForm) {             // If editForm === true display the jobForm
         content = (
             <JobForm handleCheck={() => { 'func' }} handleChange={() => { 'func' }} job={currentJob[0]} handleSubmit={() => { 'func' }} />
         )
-    } else {
+    } else {                    // Else display job details
         content = (
             <>
                 <div className="job-description-div">
