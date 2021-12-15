@@ -149,8 +149,8 @@ const App = () => {
 					element={< Jobs user={user} jobs={jobs} getJobs={getJobs} />}
 				/>
 				<Route
-					path='/job-detail'
-					element={< JobDetail />}
+					path='/job/:id'
+					element={< JobDetail jobs={jobs}/>}
 				/>
 				
 			</Routes>
