@@ -50,6 +50,7 @@ function Task(props) {
                             shrink: true,
                         }}
                     /> */}
+                    <h2>General notes:</h2> {/* Research better/bigger text input field that saves */}
                     <form>
                     <input type="text"/>
                     </form>
@@ -57,7 +58,6 @@ function Task(props) {
             </div>
         )
     })
-
 
     //REMIND GORO ABOUT LINE 27
     return (
