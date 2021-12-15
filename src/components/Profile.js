@@ -95,8 +95,10 @@ function Profile(props) {
 	 * PROFILE INFO FORMS  *
 	 ***********************/	
     let display 
-    if (props.currentProfile.length === 0) {            // If check to see if a profile exists
-        display = (                                     // If doesn't exist, show form upon first login
+    // If check to see if a profile exists
+    // If doesn't exist, show form upon first login
+    if (props.currentProfile.length === 0) {            
+        display = (                                     
             <form onSubmit={handleSubmit} >
                 <div>
                     <label htmlFor="name">Name</label>
@@ -113,8 +115,11 @@ function Profile(props) {
                 <input type="submit" value="submit" />
             </form>
         )
-    } else {                    // If profile exists, check if edit state is false
-        if (edit === false){    // If edit state false, show profile info
+    } 
+    // If profile exists, check if edit state is false
+        else {     
+        // If edit state false, show profile info otherwise show form            
+        if (edit === false){    
             display = (
                 <div>
                     <h1>profile</h1>
@@ -125,7 +130,7 @@ function Profile(props) {
                     <button onClick={editProfile}>Edit Profile</button>
                 </div>
             )
-        } else {            // If edit state true, show form
+        } else {            
         
             display = (
                 <form onSubmit={handleEdit} >

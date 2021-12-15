@@ -11,25 +11,27 @@ function JobDetail(props) {
     const [editForm, setEditForm] = useState(false)
 
 
-
-    let id = useParams().id                 // Get url parameter
+    // Get url parameter
+    let id = useParams().id                 
     console.log('THIS IS THE ID', id)
 
-    let currentJob = props.jobs.filter(job => { // Filter through job array to get the job selected
+    // Filter through job array to get the job selected
+    let currentJob = props.jobs.filter(job => { 
         return job._id === id
     })
 
-    const editToggle = () => {                  // Function to set edit form to T/F
+    // Function to set edit form to T/F
+    const editToggle = () => {                  
         editForm ? setEditForm(false) : setEditForm(true)
     }
 
     let content
-
-    if (editForm) {             // If editForm === true display the jobForm
+    // If check to display either form or info
+    if (editForm) {             
         content = (
             <JobForm handleCheck={() => { 'func' }} handleChange={() => { 'func' }} job={currentJob[0]} handleSubmit={() => { 'func' }} />
         )
-    } else {                    // Else display job details
+    } else {                    
         content = (
             <>
                 <div className="job-description-div">

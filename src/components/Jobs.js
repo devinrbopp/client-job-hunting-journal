@@ -34,12 +34,14 @@ function Jobs(props) {
     /*********************
 	 * HELPER FUNCTIONS  *
 	 *********************/
-    const handleChange = (e) => {
-        setNewJob({ ...newJob, [e.target.name]: e.target.value }) // Sets newJob state to input values
-    }
 
+    // Sets newJob state to input values
+    const handleChange = (e) => {
+        setNewJob({ ...newJob, [e.target.name]: e.target.value }) 
+    }
+    // Sets 'applied' value to true/false
     const handleCheck = (e) => {
-        setNewJob({ ...newJob, [e.target.name]: e.target.checked }) // Sets 'applied' value to true/false
+        setNewJob({ ...newJob, [e.target.name]: e.target.checked }) 
     }
 
     /***************************

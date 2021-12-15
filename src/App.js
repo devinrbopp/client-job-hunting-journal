@@ -62,14 +62,16 @@ const App = () => {
 	 *****************************************/	
 	const getProfile = () => {
 		if (user != null) {
-			fetch(`http://localhost:8000/profiles/${user._id}`) // Fetch request into db using userId as a param
+			// Fetch request into db using userId as a param
+			fetch(`http://localhost:8000/profiles/${user._id}`) 
 			.then(profile => {
 				console.log('PROFILE RETRIEVED FROM SERVER')
 				return profile.json()
 			})
 			.then(profile =>{
+				// Set current profile to the profile retrieved from fetch req
 				console.log('this is profile:', profile)
-				setCurrentProfile(profile[0]) 				// Set current profile to the profile retrieved from fetch req
+				setCurrentProfile(profile[0]) 				
 				return 'complete'
 			})
 			.catch(error => console.log(error))
@@ -81,18 +83,19 @@ const App = () => {
 	 **********************************************/	
 	const getJobs = () => {
 		if (user != null) {
-			fetch('http://localhost:8000/jobs/user', {		// Fetch req to get the job
+			fetch('http://localhost:8000/jobs/user', {		
+				// Requires user to be signed in
 				headers: {
-					'Authorization': 'Bearer ' + user.token // Requires user to be signed in
+					'Authorization': 'Bearer ' + user.token 
 				}
 			})
 				.then(jobs => {
 					console.log('JOBS RETRIEVED FROM SERVER', jobs)
-					return jobs.json()						// Retrieve the fetched jobs from API call
+					return jobs.json()						
 				})
 				.then(jobs => {
 					console.log('this is jobs: ', jobs)
-					setJobs(jobs)							// Sett jobs state to jobs retrieved
+					setJobs(jobs)							
 				})
 				.catch(error => console.log(error))
 		}

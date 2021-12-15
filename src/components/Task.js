@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 function Task(props) {
 
-    // Declare all states
+    /*****************
+	 * DEFINE STATES *
+	 *****************/
     const [taskArray, setTaskArray] = useState([])
     const [taskList, setTaskList] = useState([
         { taskName: 'Submit resume', deadline: '', notes: '' },
@@ -10,11 +12,16 @@ function Task(props) {
         { taskName: 'New thing', deadline: '', notes: '' }
     ])
     const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '' })
+    /********************
+	 * HELPER FUNCTIONS *
+	 ********************/
 
+    // Sets newTask state to input values
     const handleChange = (e) => {
         setNewTask({...newTask, [e.target.name]: e.target.value})
     }
 
+    // Post the created task to database
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log('this is e', e)
@@ -39,7 +46,7 @@ function Task(props) {
         })
         .catch(error => { console.log(error) })
     }
-
+    // Update 'completed' value in database 
     const markAsCompleted = (e) => {
         let preJSONBody ={
             completed: true
@@ -53,7 +60,7 @@ function Task(props) {
         .then(() => props.getJobs())
         .catch(error => console.log(error))
     }
-
+    // Iterate through task array to display all tasks created 
     const tasks = props.tasks.map(task => {
         return (
             <div>
@@ -75,8 +82,9 @@ function Task(props) {
             </div>
         )
     })
-
-    //REMIND GORO ABOUT LINE 27
+    /**********************
+	 * TASK CREATION FORM *
+	 **********************/
     return (
         <div>
             <form onSubmit={handleSubmit}>
