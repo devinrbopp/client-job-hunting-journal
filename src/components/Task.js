@@ -4,23 +4,23 @@ function Task(props) {
 
     // Declare all states
     const [taskArray, setTaskArray] = useState([])
-    const [taskList, setTaskList] = useState([{ taskName: 'Submit resume', deadline: '', notes: '' },
-    { taskName: 'Interview Prep', deadline: '', notes: '' },
-    { taskName: 'New thing', deadline: '', notes: '' }])
-    const [newTask, setNewTask] = useState({ taskName: '', deadline: '', notes: '' })
+    const [taskList, setTaskList] = useState([
+        { taskName: 'Submit resume', deadline: '', notes: '' },
+        { taskName: 'Interview Prep', deadline: '', notes: '' },
+        { taskName: 'New thing', deadline: '', notes: '' }
+    ])
+    const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '' })
 
-    const handleSelect = (e) => {
-        e.preventDefault()
-        // console.log('this is e', e)
-        // console.log("this is e.target.value", e.target.value)
-        setNewTask(taskList[e.target.value])
+    const handleChange = (e) => {
+        setNewTask({...newTask, [e.target.name]: e.target.value})
     }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log('this is e', e)
         console.log("submit button clicked", e.target.value)
         console.log('this is jobId', props.jobId)
-        setTaskArray((previousTask) => [...taskArray, newTask])
+        // setTaskArray((previousTask) => [...taskArray, newTask])
         let preJSONBody = {
             taskName: newTask.taskName,
             deadline: newTask.deadline,
@@ -34,6 +34,7 @@ function Task(props) {
         })
         .then(response => {
             console.log(response.json())
+            setNewTask({ taskName: null, deadline: '', notes: '' })
         })
         .catch(error => { console.log(error) })
     }
@@ -74,19 +75,20 @@ function Task(props) {
     //REMIND GORO ABOUT LINE 27
     return (
         <div>
-            <form onChange={handleSelect}>
-                <select name="taskName-dropdown">
+            <form onSubmit={handleSubmit}>
+                <select name="taskName" value={newTask.taskName} onChange={handleChange}>
                     <option value="null">--Select a Task--</option>
-                    <option value={0}>{taskList[0].taskName}</option>
-                    <option value={1}>{taskList[1].taskName}</option>
-                    <option value={2}>{taskList[2].taskName}</option>
+                    <option value='Submit Resume'>Submit Resume</option>
+                    <option value='Accept Offer'>Accept Offer</option>
+                    <option value='Other Misc Task'>Other Misc Task</option>
                 </select>
+                <label htmlFor="deadline">Deadline: </label>
+                <input type="date" name="deadline" id="deadline" value={newTask.deadline} onChange={handleChange} />
+                <label htmlFor="notes">Notes:</label>
+                <input type="text" name="notes" id="notes" value={newTask.notes} onChange={handleChange} />
                 <button type="submit" value={`${newTask.taskName}`} onClick={handleSubmit}>Add Task</button>
             </form>
             <div className='added-tasks'>
-                <p>You selected: {newTask.taskName}</p>
-            </div>
-            <div>
                 {tasks}
             </div>
         </div>

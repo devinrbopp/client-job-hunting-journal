@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Task from './Task';
+import Tasks from './Task';
 import { useParams } from 'react-router-dom'
 
 function JobDetail (props) {
@@ -21,9 +21,7 @@ function JobDetail (props) {
             <div className="general-notes"> 
                 <h2>General notes box</h2>
             </div>
-            <form>
-                <Task jobId={id} user={props.user} />
-            </form>
+            <Tasks jobId={id} user={props.user} />
         </div>
     )
 }
