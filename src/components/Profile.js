@@ -5,6 +5,9 @@ import Task from './Task';
 
 function Profile(props) {    
 
+    /**************************************
+	 * DEFINE NEW PROFILE AND EDIT STATES *
+	 **************************************/	
     const [newProfile, setNewProfile] = useState({
         name: '',
         skills: [],
@@ -14,44 +17,54 @@ function Profile(props) {
     })
     const [edit, setEdit] = useState(false)
 
-    const editProfile = (e) => {
-        setEdit(true)
-    }
-    const handleChange = (e) => {
-        setNewProfile({...newProfile, [e.target.name]: e.target.value})
-    }
+    /*********************
+	 * HELPER FUNCTIONS  *
+	 *********************/	
 
+    const editProfile = (e) => {
+        setEdit(true)                       //Set edit state to true on click
+    }
+    
+    const handleChange = (e) => {
+        setNewProfile({...newProfile, [e.target.name]: e.target.value}) // Set values in new profile state to entries
+    }
+    /*********************************
+	 * FUNCTION TO SET EDIT PROFILE  *
+	 *********************************/	
     const handleEdit = (e) => {
-        e.preventDefault()
+        e.preventDefault()                                      //Prevent refresh
         // console.log('this is currentProfile.owner: ', props.currentProfile.owner)
         // console.log('this is user._id: ', props.user._id)
-        let preJSONBody = {
+        let preJSONBody = {                         //send data to the API in this object form
             name: newProfile.name,
             skills: newProfile.skills,
             zipCode: newProfile.zipCode,
             interviewQuestions: newProfile.interviewQuestions,
-            owner: props.currentProfile.owner
+            owner: props.currentProfile.owner      // Assigns a user to profile
         }
-        fetch(`http://localhost:8000/profiles/${props.currentProfile._id}`, {
+        fetch(`http://localhost:8000/profiles/${props.currentProfile._id}`, {       //Fetch request to update profile
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
         .then(() => {
             console.log('is this hitting?')
-            setNewProfile({
+            setNewProfile({             //Reset profile state to empty state
                 name: '',
                 skills: [],
                 zipCode: '',
                 interviewQuestions: {},
                 owner: props.user._id
             })
-            setEdit(false)
-            props.getProfile()
+            setEdit(false)             //Set edit to false so edit form no longer shows
+            props.getProfile()        //Call getProfile function to show info
         })
         .catch(error => { console.log(error) })
     }
-    const handleSubmit = (e) => {
+    /*************************************
+	 * FUNCTION TO CREATE FIRST PROFILE  *
+	 *************************************/	
+    const handleSubmit = (e) => {       
         e.preventDefault()
         let preJSONBody = {
             name: newProfile.name,
@@ -78,9 +91,12 @@ function Profile(props) {
         })
         .catch(error => { console.log(error) })
     }
+    /***********************
+	 * PROFILE INFO FORMS  *
+	 ***********************/	
     let display 
-    if (props.currentProfile.length === 0) {
-        display = (
+    if (props.currentProfile.length === 0) {            // If check to see if a profile exists
+        display = (                                     // If doesn't exist, show form upon first login
             <form onSubmit={handleSubmit} >
                 <div>
                     <label htmlFor="name">Name</label>
@@ -97,8 +113,8 @@ function Profile(props) {
                 <input type="submit" value="submit" />
             </form>
         )
-    } else {
-        if (edit === false){
+    } else {                    // If profile exists, check if edit state is false
+        if (edit === false){    // If edit state false, show profile info
             display = (
                 <div>
                     <h1>profile</h1>
@@ -109,7 +125,7 @@ function Profile(props) {
                     <button onClick={editProfile}>Edit Profile</button>
                 </div>
             )
-        } else {
+        } else {            // If edit state true, show form
         
             display = (
                 <form onSubmit={handleEdit} >
