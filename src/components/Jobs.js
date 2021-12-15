@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
+import JobForm from './JobForm';
 
 function Jobs(props) {
 
@@ -70,30 +71,8 @@ function Jobs(props) {
 
     return (
         <div className="container-div">
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="jobTitle">Job Title: </label>
-                    <input type="text" name="jobTitle" id="jobTitle" onChange={handleChange} value={newJob.jobTitle} />
-                </div>
-                <div>
-                    <label htmlFor="company">Company: </label>
-                    <input type="text" name="company" id="company" onChange={handleChange} value={newJob.company} />
-                </div>
-                <div>
-                    <label htmlFor="zipCode">Zip Code: </label>
-                    <input type="text" name="zipCode" id="zipCode" onChange={handleChange} value={newJob.zipCode} />
-                </div>
-                <div>
-                    <label htmlFor="jobDescription">Job Description: </label>
-                    <input type="text" name="jobDescription" id="jobDescription" onChange={handleChange} value={newJob.jobDescription} />
-                </div>
-                <div>
-                    <label htmlFor="applied">Applied </label>
-                    <input type="checkbox" name="applied" id="applied" onChange={handleCheck} checked={newJob.applied ? "checked" : ""} />
-                </div>
-                <input type="submit" value="submit" />
-
-            </form>
+            <h2>Add a new job:</h2>
+            <JobForm handleCheck={handleCheck} handleChange={handleChange} job={newJob} handleSubmit={handleSubmit} />
 
             <div className="job-cards">
                 {allJobs}
