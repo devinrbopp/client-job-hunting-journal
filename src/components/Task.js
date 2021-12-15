@@ -80,7 +80,7 @@ function Task(props) {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                // BUG: NEED TO RESET SELECT AFTER SUBMIT
+                {/* BUG: NEED TO RESET SELECT AFTER SUBMIT */}
                 <select name="taskName" value={newTask.taskName} onChange={handleChange}>
                     <option value="null">--Select a Task--</option>
                     <option value='Submit Resume'>Submit Resume</option>
