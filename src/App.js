@@ -150,7 +150,7 @@ const App = () => {
 				/>
 				<Route
 					path='/job/:id'
-					element={< JobDetail jobs={jobs} user={user} />}
+					element={< JobDetail jobs={jobs} user={user} getJobs={getJobs}/>}
 				/>
 				
 			</Routes>

@@ -35,24 +35,16 @@ function Task(props) {
         .then(response => {
             console.log(response.json())
             setNewTask({ taskName: null, deadline: '', notes: '' })
+            props.getJobs()
         })
         .catch(error => { console.log(error) })
     }
 
-    const getTask = () => {
-        fetch(`http://localhost:8000/tasks`, {
-            headers: { 'Content-Type': 'application/JSON' }
-        })
-        .then(tasks => {
-            console.log('this is tasks: ', tasks)
-        })
-    }
-
-    const tasks = taskArray.map(taskName => {
+    const tasks = props.tasks.map(task => {
         return (
             <div>
-                <h1>{taskName.taskName}</h1>
-                <h2>Deadline:</h2>
+                <h1>{task.taskName}</h1>
+                <h2>Deadline: {task.deadline}</h2>
                     {/* 
                     Need to npm i @material-ui/core for this to work
                     <TextField
@@ -63,10 +55,8 @@ function Task(props) {
                             shrink: true,
                         }}
                     /> */}
-                    <h2>General notes:</h2> {/* Research better/bigger text input field that saves */}
-                    <form>
-                    <input type="text"/>
-                    </form>
+                    <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
+                    <h2>Completed: {task.completed ? 'Yes!' : 'No!'}</h2>
 
             </div>
         )
@@ -76,6 +66,7 @@ function Task(props) {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                // BUG: NEED TO RESET SELECT AFTER SUBMIT
                 <select name="taskName" value={newTask.taskName} onChange={handleChange}>
                     <option value="null">--Select a Task--</option>
                     <option value='Submit Resume'>Submit Resume</option>
