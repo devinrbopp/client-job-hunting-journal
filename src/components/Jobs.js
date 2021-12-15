@@ -4,6 +4,9 @@ import JobForm from './JobForm';
 
 function Jobs(props) {
 
+    /*************************
+	 * DEFINE NEWJOB STATES  *
+	 *************************/	
     const [newJob, setNewJob] = useState({
         jobTitle: "",
         company: "",
@@ -27,14 +30,21 @@ function Jobs(props) {
         reset new job to empty values
     }
     */
+
+    /*********************
+	 * HELPER FUNCTIONS  *
+	 *********************/
     const handleChange = (e) => {
-        setNewJob({ ...newJob, [e.target.name]: e.target.value })
+        setNewJob({ ...newJob, [e.target.name]: e.target.value }) // Sets newJob state to input values
     }
 
     const handleCheck = (e) => {
-        setNewJob({ ...newJob, [e.target.name]: e.target.checked })
+        setNewJob({ ...newJob, [e.target.name]: e.target.checked }) // Sets 'applied' value to true/false
     }
 
+    /***************************
+	 * POST CREATED JOB TO DB  *
+	 ***************************/
     const handleSubmit = (e) => {
         e.preventDefault()
         let preJSONBody = {
@@ -66,6 +76,9 @@ function Jobs(props) {
             .catch(error => console.log(error))
     }
 
+    /*********************************************
+	 * ITERATE THROUGH JOBS TO DISPLAY ALL JOBS  *
+	 *********************************************/
     const allJobs = props.jobs.map(job => <JobCard job={job} user={props.user} getJobs={props.getJobs}/>)
     console.log(allJobs)
 
