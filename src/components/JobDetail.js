@@ -21,10 +21,8 @@ function JobDetail (props) {
                 <h2>General notes box</h2>
             </div>
             <form>
-                <p id="dropdown">Task dropdown menu</p>
-                <p id="deadline">Deadline and notes</p>
+                <Task/>
             </form>
-            <Task/>
         </div>
     )
 }
