@@ -65,7 +65,7 @@ function Jobs(props) {
             .catch(error => console.log(error))
     }
 
-    const allJobs = props.jobs.map(job => <JobCard job={job} />)
+    const allJobs = props.jobs.map(job => <JobCard job={job} user={props.user} getJobs={props.getJobs}/>)
     console.log(allJobs)
 
     return (
