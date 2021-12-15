@@ -22,7 +22,7 @@ function JobDetail (props) {
                 <h2>General notes box</h2>
             </div>
             <form>
-                <Task/>
+                <Task jobId={id} user={props.user} />
             </form>
         </div>
     )
