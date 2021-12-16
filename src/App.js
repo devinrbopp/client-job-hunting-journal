@@ -25,13 +25,7 @@ const App = () => {
 	const [profile, setProfile] = useState([])
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
-	const [currentProfile, setCurrentProfile] = useState({
-        name: '',
-        skills: [],
-        zipCode: '',
-        interviewQuestions: {},
-        owner: ''
-    })
+	const [currentProfile, setCurrentProfile] = useState(null)
 
 
 
@@ -113,7 +107,7 @@ const App = () => {
 
 	return (
 		<Fragment>
-			<Header user={user} />
+			<Header user={user} currentProfile={currentProfile} />
 			<Routes>
 				<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
 				<Route

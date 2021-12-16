@@ -79,7 +79,7 @@ function Profile(props) {
         .catch(error => { console.log(error) })
     }
     let display 
-    if (props.currentProfile.length === 0) {
+    if (props.currentProfile === undefined) {
         display = (
             <form onSubmit={handleSubmit} >
                 <div>

@@ -2,10 +2,13 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
+import { propTypes } from 'react-bootstrap/esm/Image'
 const linkStyle = {
     color: 'white',
     textDecoration: 'none'
 }
+
+
 const authenticatedOptions = (
 	<>
 		<Nav.Link>
@@ -52,7 +55,8 @@ const alwaysOptions = (
 	</>
 )
 
-const Header = ({ user }) => (
+
+const Header = ({ user, currentProfile }) => (
 	<Navbar bg='primary' variant='dark' expand='md'>
 		<Navbar.Brand>
             <Link to='/' style={linkStyle}>
@@ -62,14 +66,15 @@ const Header = ({ user }) => (
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='ml-auto'>
-				{user && (
-					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
+			{currentProfile && (
+					<span className='navbar-text mr-2'>Welcome, {currentProfile.name}</span>
 				)}
 				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
 		</Navbar.Collapse>
 	</Navbar>
-)
-
+	)
+			
+					
 export default Header
