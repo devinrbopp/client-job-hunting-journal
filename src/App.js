@@ -124,7 +124,7 @@ const App = () => {
 					path='/sign-out'
 					element={
 						<RequireAuth user={user}>
-							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
+							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} setCurrentProfile={setCurrentProfile} />
 						</RequireAuth>
 					}
 				/>
