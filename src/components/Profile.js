@@ -145,7 +145,7 @@ function Profile(props) {
                     </div>
                     <div>
                         <label htmlFor="zipCode">Zip Code</label>
-                        <input onChange={handleChange} type="text" name="zipCode" id="zipCode" value={props.currentProfile.zipCode} />
+                        <input onChange={handleChange} type="text" minLength="5" maxLength="5" name="zipCode" id="zipCode" value={props.currentProfile.zipCode} />
                     </div>
                     <input type="submit" value="submit" />
                 </form>)

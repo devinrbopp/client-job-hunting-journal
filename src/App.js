@@ -16,6 +16,8 @@ import Profile from './components/Profile'
 import Jobs from './components/Jobs'
 import JobDetail from './components/JobDetail'
 
+
+
 const App = () => {
 
     /************************************
@@ -146,7 +148,7 @@ const App = () => {
 				/>
 				<Route
 					path='/job/:id'
-					element={< JobDetail jobs={jobs} user={user} getJobs={getJobs}/>}
+					element={< JobDetail jobs={jobs} user={user} getJobs={getJobs} />}
 				/>
 				
 			</Routes>

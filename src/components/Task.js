@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
+
 function Task(props) {
 
     /*****************
-	 * DEFINE STATES *
-	 *****************/
+     * DEFINE STATES *
+     *****************/
 
     const [taskArray, setTaskArray] = useState([])
 
@@ -17,12 +18,12 @@ function Task(props) {
     const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '' })
 
     /********************
-	 * HELPER FUNCTIONS *
-	 ********************/
+     * HELPER FUNCTIONS *
+     ********************/
 
     // Sets newTask state to input values
     const handleChange = (e) => {
-        setNewTask({...newTask, [e.target.name]: e.target.value})
+        setNewTask({ ...newTask, [e.target.name]: e.target.value })
     }
 
     // Post the created task to database
@@ -43,12 +44,12 @@ function Task(props) {
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
-        .then(response => {
-            console.log(response.json())
-            setNewTask({ taskName: null, deadline: '', notes: '' })
-            props.getJobs()
-        })
-        .catch(error => { console.log(error) })
+            .then(response => {
+                console.log(response.json())
+                setNewTask({ taskName: null, deadline: '', notes: '' })
+                props.getJobs()
+            })
+            .catch(error => { console.log(error) })
     }
 
     // Update 'completed' value in database 
@@ -62,8 +63,8 @@ function Task(props) {
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
-        .then(() => props.getJobs())
-        .catch(error => console.log(error))
+            .then(() => props.getJobs())
+            .catch(error => console.log(error))
     }
 
     // Delete task
@@ -73,8 +74,8 @@ function Task(props) {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
-        .then(() => props.getJobs())
-        .catch(error => console.log(error))
+            .then(() => props.getJobs())
+            .catch(error => console.log(error))
     }
 
     // Iterate through task array to display all tasks created 
@@ -85,31 +86,34 @@ function Task(props) {
     })
 
     const tasks = props.tasks.map(task => {
+        let style
+        let today = new Date(),
+            date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+        if (task.deadline.substr(0, 10) <= date) {
+            style = { color: 'red' }
+        } else {
+            style = { color: 'black' }
+        }
         return (
             <div>
                 <h1>{task.taskName}</h1>
-                <h2>Deadline: {task.deadline}</h2>
-                    {/* 
-                    Need to npm i @material-ui/core for this to work
-                    <TextField
-                        id= deadline"
-                        label="Choose your deadline"
-                        type= deadline"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    /> */}
-                    <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
-                    <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
-                    <button onClick={() => deleteTask(task)}>Delete Task</button>
+                <h2 style={style} name="taskDeadline">Deadline: {task.deadline}</h2>
+
+                <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
+                <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
+                <button onClick={() => deleteTask(task)}>Delete Task</button>
 
             </div>
         )
     })
-    
-    /**********************
-	 * TASK CREATION FORM *
-	 **********************/
+
+
+
+    /*********************
+     * TASK CREATION FORM *
+     **********************/
+
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
