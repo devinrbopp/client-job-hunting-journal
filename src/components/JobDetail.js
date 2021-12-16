@@ -14,7 +14,6 @@ function JobDetail(props) {
     // let currentJob = props.jobs.filter(job => { 
     //     return job._id === id
     // })
-    const [jobTasks, setJobTasks] = useState([])
     // editForm determines whether the edit form should be displayed
     const [editForm, setEditForm] = useState(false)
     // current job determines which job is on the current page using the params
@@ -23,6 +22,33 @@ function JobDetail(props) {
     }))
     // edit job is an editable state that is changed by the form
     const [editJob, setEditJob] = useState(currentJob[0])
+
+    const [tasks, setTasks] = useState([])
+
+    // FETCH TO RETRIEVE LIST OF TASKS
+    const getTasks = () => {
+        fetch('http://localhost:8000/tasks', {
+            headers: {
+                'Authorization': 'Bearer ' + props.user.token 
+            }
+        })
+            .then(tasks => tasks.json())
+            .then(tasks => {
+                console.log('THESE ARE TASKS BEFORE THEY ARE FILTERED', tasks)
+                return tasks.filter(task => {
+                    return task.jobId = id
+                })
+            })
+            .then(theseTasks => {
+                console.log('THESE ARE THE TASKS FOR THIS JOB PAGE:', theseTasks)
+                setTasks(theseTasks)
+            })
+            .catch(error => console.log(error))
+    }
+
+    useEffect(() => {
+        getTasks()
+    }, [props])
 
     // when a new list of jobs is retrieved, reset the current job to its updated info
     useEffect(() => {
@@ -101,7 +127,7 @@ function JobDetail(props) {
         <div>
             <h1>This is job detail Page</h1>
             {content}
-            <Tasks jobId={id} tasks={currentJob[0].tasks} user={props.user} getJobs={props.getJobs} />
+            <Tasks getTasks={getTasks} jobId={id} tasks={tasks} user={props.user} getJobs={props.getJobs} />
         </div>
     )
 }

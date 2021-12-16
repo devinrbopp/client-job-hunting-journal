@@ -15,7 +15,7 @@ function Task(props) {
         { taskName: 'New thing', deadline: '', notes: '' }
     ])
 
-    const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '' })
+    const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '', owner: props.user._id, jobId: props.jobId })
 
     /********************
      * HELPER FUNCTIONS *
@@ -29,24 +29,23 @@ function Task(props) {
     // Post the created task to database
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('this is e', e)
-        console.log('submit button clicked', e.target.value)
-        console.log('this is jobId', props.jobId)
         // setTaskArray((previousTask) => [...taskArray, newTask])
         let preJSONBody = {
             taskName: newTask.taskName,
             deadline: newTask.deadline,
-            notes: newTask.notes
+            notes: newTask.notes,
+            owner: props.user._id, // props.user._id,
+            jobId: props.jobId
+
         }
-        console.log('This is preJSONBody: ', preJSONBody)
-        fetch(`http://localhost:8000/tasks/${props.jobId}`, { //change jobId to prop.jobId after job page completed
+        fetch(`http://localhost:8000/tasks`, { //change jobId to prop.jobId after job page completed
             method: 'POST',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
             .then(response => {
                 console.log(response.json())
-                setNewTask({ taskName: null, deadline: '', notes: '' })
+                setNewTask({ taskName: null, deadline: '', notes: '', owner: props.user._id, jobId: props.jobId })
                 props.getJobs()
             })
             .catch(error => { console.log(error) })
@@ -58,23 +57,23 @@ function Task(props) {
             completed: true
         }
         console.log('e.target!', e._id)
-        fetch(`http://localhost:8000/tasks/${props.jobId}/${e._id}`, {
+        fetch(`http://localhost:8000/tasks/${e._id}`, {
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
-            .then(() => props.getJobs())
+            .then(() => props.getTasks())
             .catch(error => console.log(error))
     }
 
     // Delete task
     const deleteTask = (e) => {
         console.log('This is e: ', e._id)
-        fetch(`http://localhost:8000/tasks/${props.jobId}/${e._id}`, {
+        fetch(`http://localhost:8000/tasks/${e._id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
-            .then(() => props.getJobs())
+            .then(() => props.getTasks())
             .catch(error => console.log(error))
     }
 
