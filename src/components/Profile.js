@@ -27,6 +27,7 @@ function Profile(props) {
     
     const handleChange = (e) => {
         setNewProfile({...newProfile, [e.target.name]: e.target.value}) // Set values in new profile state to entries
+        props.setCurrentProfile({...props.currentProfile, [e.target.name]: e.target.value})
     }
     /*********************************
 	 * FUNCTION TO SET EDIT PROFILE  *
@@ -36,10 +37,10 @@ function Profile(props) {
         // console.log('this is currentProfile.owner: ', props.currentProfile.owner)
         // console.log('this is user._id: ', props.user._id)
         let preJSONBody = {                         // Send data to the API in this object form
-            name: newProfile.name,
-            skills: newProfile.skills,
-            zipCode: newProfile.zipCode,
-            interviewQuestions: newProfile.interviewQuestions,
+            name: props.currentProfile.name,
+            skills: props.currentProfile.skills,
+            zipCode: props.currentProfile.zipCode,
+            interviewQuestions: props.currentProfile.interviewQuestions,
             owner: props.currentProfile.owner      // Assigns a user to profile
         }
         fetch(`http://localhost:8000/profiles/${props.currentProfile._id}`, {       // Fetch request to update profile
@@ -124,7 +125,7 @@ function Profile(props) {
                 <div>
                     <h1>profile</h1>
                     <h2>{props.currentProfile.name}</h2>
-                    <h3>{props.currentProfile.skills.join(", ")}</h3>
+                    <h3>{props.currentProfile.skills}</h3>
                     <h3>{props.currentProfile.zipCode}</h3>
                     <h3>{props.currentProfile.interviewQuestions}</h3>
                     <button onClick={editProfile}>Edit Profile</button>
@@ -133,18 +134,18 @@ function Profile(props) {
         } else {            
         
             display = (
-                <form onSubmit={handleEdit} >
+                <form onSubmit={handleEdit}>
                     <div>
                         <label htmlFor="name">Name</label>
-                        <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name} />
+                        <input onChange={handleChange} type="text" name="name" id="name" value={props.currentProfile.name}/>
                     </div>
                     <div>
                         <label htmlFor="skills">Skills</label>
-                        <input onChange={handleChange} type="text" name="skills" id="skills" value={newProfile.skills} />
+                        <input onChange={handleChange} type="text" name="skills" id="skills" value={props.currentProfile.skills} />
                     </div>
                     <div>
                         <label htmlFor="zipCode">Zip Code</label>
-                        <input onChange={handleChange} type="text" name="zipCode" id="zipCode" value={newProfile.zipCode} />
+                        <input onChange={handleChange} type="text" name="zipCode" id="zipCode" value={props.currentProfile.zipCode} />
                     </div>
                     <input type="submit" value="submit" />
                 </form>)
