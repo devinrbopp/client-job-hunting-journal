@@ -5,13 +5,17 @@ function Task(props) {
     /*****************
 	 * DEFINE STATES *
 	 *****************/
+
     const [taskArray, setTaskArray] = useState([])
+
     const [taskList, setTaskList] = useState([
         { taskName: 'Submit resume', deadline: '', notes: '' },
         { taskName: 'Interview Prep', deadline: '', notes: '' },
         { taskName: 'New thing', deadline: '', notes: '' }
     ])
+
     const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '' })
+
     /********************
 	 * HELPER FUNCTIONS *
 	 ********************/
@@ -25,7 +29,7 @@ function Task(props) {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log('this is e', e)
-        console.log("submit button clicked", e.target.value)
+        console.log('submit button clicked', e.target.value)
         console.log('this is jobId', props.jobId)
         // setTaskArray((previousTask) => [...taskArray, newTask])
         let preJSONBody = {
@@ -46,9 +50,10 @@ function Task(props) {
         })
         .catch(error => { console.log(error) })
     }
+
     // Update 'completed' value in database 
     const markAsCompleted = (e) => {
-        let preJSONBody ={
+        let preJSONBody = {
             completed: true
         }
         console.log('e.target!', e._id)
@@ -60,6 +65,18 @@ function Task(props) {
         .then(() => props.getJobs())
         .catch(error => console.log(error))
     }
+
+    // Delete task
+    const deleteTask = (e) => {
+        console.log('This is e: ', e._id)
+        fetch(`http://localhost:8000/tasks/${props.jobId}/${e._id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
+        })
+        .then(() => props.getJobs())
+        .catch(error => console.log(error))
+    }
+
     // Iterate through task array to display all tasks created 
     const tasks = props.tasks.map(task => {
         return (
@@ -78,6 +95,7 @@ function Task(props) {
                     /> */}
                     <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
                     <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
+                    <button onClick={() => deleteTask(task)}>Delete Task</button>
 
             </div>
         )
@@ -89,17 +107,17 @@ function Task(props) {
         <div>
             <form onSubmit={handleSubmit}>
                 {/* BUG: NEED TO RESET SELECT AFTER SUBMIT */}
-                <select name="taskName" value={newTask.taskName} onChange={handleChange}>
-                    <option value="null">--Select a Task--</option>
-                    <option value='Submit Resume'>Submit Resume</option>
-                    <option value='Accept Offer'>Accept Offer</option>
-                    <option value='Other Misc Task'>Other Misc Task</option>
+                <select name='taskName' value={newTask.taskName} onChange={handleChange} >
+                    <option value='null' >--Select a Task--</option>
+                    <option value='Submit Resume' >Submit Resume</option>
+                    <option value='Accept Offer' >Accept Offer</option>
+                    <option value='Other Misc Task' >Other Misc Task</option>
                 </select>
-                <label htmlFor="deadline">Deadline: </label>
-                <input type="date" name="deadline" id="deadline" value={newTask.deadline} onChange={handleChange} />
-                <label htmlFor="notes">Notes:</label>
-                <input type="text" name="notes" id="notes" value={newTask.notes} onChange={handleChange} />
-                <button type="submit" value={`${newTask.taskName}`} onClick={handleSubmit}>Add Task</button>
+                <label htmlFor='deadline'>Deadline: </label>
+                <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} />
+                <label htmlFor='notes' >Notes:</label>
+                <input type='text' name='notes' id='notes' value={newTask.notes} onChange={handleChange} />
+                <button type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
             </form>
             <div className='added-tasks'>
                 {tasks}
