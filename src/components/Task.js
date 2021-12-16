@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 function Task(props) {
 
     /*****************
@@ -100,7 +101,20 @@ function Task(props) {
             </div>
         )
     })
-    /**********************
+    //  past due color change function
+     
+    const pastDue = () => {
+        let today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+        if(newTask.deadline.substr(0, 10) <= date){
+           document.getElementsByName('deadline').style.color = 'red'
+            console.log('dates are today or in the past')
+        } else {
+            console.log('dates are neither')
+        }
+    }
+
+    /*********************
 	 * TASK CREATION FORM *
 	 **********************/
     return (
@@ -117,7 +131,7 @@ function Task(props) {
                 <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} />
                 <label htmlFor='notes' >Notes:</label>
                 <input type='text' name='notes' id='notes' value={newTask.notes} onChange={handleChange} />
-                <button type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
+                <button type='submit' value={`${newTask.taskName}`} onClick={handleSubmit, pastDue} >Add Task</button>
             </form>
             <div className='added-tasks'>
                 {tasks}
