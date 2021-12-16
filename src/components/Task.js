@@ -78,6 +78,12 @@ function Task(props) {
     }
 
     // Iterate through task array to display all tasks created 
+    props.tasks.sort(function compare(a, b) {
+        let dateA = new Date(a.deadline)
+        let dateB = new Date(b.deadline)
+        return dateA - dateB
+    })
+
     const tasks = props.tasks.map(task => {
         return (
             <div>
@@ -100,6 +106,7 @@ function Task(props) {
             </div>
         )
     })
+    
     /**********************
 	 * TASK CREATION FORM *
 	 **********************/
