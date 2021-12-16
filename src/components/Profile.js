@@ -91,14 +91,14 @@ function Profile(props) {
         })
         .catch(error => { console.log(error) })
     }
-    /***********************
+   /***********************
 	 * PROFILE INFO FORMS  *
 	 ***********************/	
     let display 
     // If check to see if a profile exists
     // If doesn't exist, show form upon first login
-    if (props.currentProfile.length === 0) {            
-        display = (                                     
+    if (props.currentProfile === undefined) {
+        display = (
             <form onSubmit={handleSubmit} >
                 <div>
                     <label htmlFor="name">Name</label>
