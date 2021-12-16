@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
+import JobForm from './JobForm';
 
 function Jobs(props) {
 
+    /*************************
+	 * DEFINE NEWJOB STATES  *
+	 *************************/	
     const [newJob, setNewJob] = useState({
         jobTitle: "",
         company: "",
@@ -26,14 +30,23 @@ function Jobs(props) {
         reset new job to empty values
     }
     */
+
+    /*********************
+	 * HELPER FUNCTIONS  *
+	 *********************/
+
+    // Sets newJob state to input values
     const handleChange = (e) => {
-        setNewJob({ ...newJob, [e.target.name]: e.target.value })
+        setNewJob({ ...newJob, [e.target.name]: e.target.value }) 
     }
-
+    // Sets 'applied' value to true/false
     const handleCheck = (e) => {
-        setNewJob({ ...newJob, [e.target.name]: e.target.checked })
+        setNewJob({ ...newJob, [e.target.name]: e.target.checked }) 
     }
 
+    /***************************
+	 * POST CREATED JOB TO DB  *
+	 ***************************/
     const handleSubmit = (e) => {
         e.preventDefault()
         let preJSONBody = {
@@ -65,35 +78,16 @@ function Jobs(props) {
             .catch(error => console.log(error))
     }
 
+    /*********************************************
+	 * ITERATE THROUGH JOBS TO DISPLAY ALL JOBS  *
+	 *********************************************/
     const allJobs = props.jobs.map(job => <JobCard job={job} user={props.user} getJobs={props.getJobs}/>)
     console.log(allJobs)
 
     return (
         <div className="container-div">
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="jobTitle">Job Title: </label>
-                    <input type="text" name="jobTitle" id="jobTitle" onChange={handleChange} value={newJob.jobTitle} />
-                </div>
-                <div>
-                    <label htmlFor="company">Company: </label>
-                    <input type="text" name="company" id="company" onChange={handleChange} value={newJob.company} />
-                </div>
-                <div>
-                    <label htmlFor="zipCode">Zip Code: </label>
-                    <input type="text" name="zipCode" id="zipCode" onChange={handleChange} value={newJob.zipCode} />
-                </div>
-                <div>
-                    <label htmlFor="jobDescription">Job Description: </label>
-                    <input type="text" name="jobDescription" id="jobDescription" onChange={handleChange} value={newJob.jobDescription} />
-                </div>
-                <div>
-                    <label htmlFor="applied">Applied </label>
-                    <input type="checkbox" name="applied" id="applied" onChange={handleCheck} checked={newJob.applied ? "checked" : ""} />
-                </div>
-                <input type="submit" value="submit" />
-
-            </form>
+            <h2>Add a new job:</h2>
+            <JobForm handleCheck={handleCheck} handleChange={handleChange} job={newJob} handleSubmit={handleSubmit} />
 
             <div className="job-cards">
                 {allJobs}
