@@ -5,33 +5,82 @@ import JobForm from './JobForm';
 
 function JobDetail(props) {
     /******************
-	 * DEFINE STATES  *
-	 ******************/
-    const [jobTasks, setJobTasks] = useState([])
-    const [editForm, setEditForm] = useState(false)
-
-
+     * DEFINE STATES  *
+     ******************/
     // Get url parameter
-    let id = useParams().id                 
-    console.log('THIS IS THE ID', id)
+    let id = useParams().id
 
     // Filter through job array to get the job selected
-    let currentJob = props.jobs.filter(job => { 
+    // let currentJob = props.jobs.filter(job => { 
+    //     return job._id === id
+    // })
+    const [jobTasks, setJobTasks] = useState([])
+    // editForm determines whether the edit form should be displayed
+    const [editForm, setEditForm] = useState(false)
+    // current job determines which job is on the current page using the params
+    const [currentJob, setCurrentJob] = useState(props.jobs.filter(job => {
         return job._id === id
-    })
+    }))
+    // edit job is an editable state that is changed by the form
+    const [editJob, setEditJob] = useState(currentJob[0])
+
+    // when a new list of jobs is retrieved, reset the current job to its updated info
+    useEffect(() => {
+        setCurrentJob(props.jobs.filter(job => {
+            return job._id === id
+        }))
+    }, [props.jobs])
+
+    // when the current job has updated, copy its info to the editJob state
+    useEffect(() => {
+        setEditJob(currentJob[0])
+    }, [currentJob])
+
+    const handleChange = (e) => {
+        setEditJob({ ...editJob, [e.target.name]: e.target.value })
+    }
+
+    // Sets 'applied' value to true/false
+    const handleCheck = (e) => {
+        setEditJob({ ...editJob, [e.target.name]: e.target.checked })
+    }
 
     // Function to set edit form to T/F
-    const editToggle = () => {                  
+    const editToggle = () => {
         editForm ? setEditForm(false) : setEditForm(true)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let preJSONBody = {
+            jobTitle: editJob.jobTitle,
+            company: editJob.company,
+            zipCode: editJob.zipCode,
+            //   leaving tasks off for now
+            applied: Boolean(editJob.applied),
+            jobDescription: editJob.jobDescription,
+            owner: editJob.owner
+        }
+        fetch(`http://localhost:8000/jobs/${editJob._id}`, {
+            method: "PATCH",
+            body: JSON.stringify(preJSONBody),
+            headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
+        })
+            .then(() => {
+                props.getJobs()
+                setEditJob(currentJob[0])
+                setEditForm(false)
+            })
+            .catch(error => console.log(error))
     }
 
     let content
     // If check to display either form or info
-    if (editForm) {             
+    if (editForm) {
         content = (
-            <JobForm handleCheck={() => { 'func' }} handleChange={() => { 'func' }} job={currentJob[0]} handleSubmit={() => { 'func' }} />
+            <JobForm handleCheck={handleCheck} handleChange={handleChange} job={editJob} handleSubmit={handleSubmit} />
         )
-    } else {                    
+    } else {
         content = (
             <>
                 <div className="job-description-div">

@@ -79,6 +79,12 @@ function Task(props) {
     }
 
     // Iterate through task array to display all tasks created 
+    props.tasks.sort(function compare(a, b) {
+        let dateA = new Date(a.deadline)
+        let dateB = new Date(b.deadline)
+        return dateA - dateB
+    })
+
     const tasks = props.tasks.map(task => {
         let style
         let today = new Date(),
@@ -102,9 +108,12 @@ function Task(props) {
     })
 
 
+
     /*********************
      * TASK CREATION FORM *
      **********************/
+
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
