@@ -124,7 +124,7 @@ const App = () => {
 					path='/sign-out'
 					element={
 						<RequireAuth user={user}>
-							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
+							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} setCurrentProfile={setCurrentProfile} />
 						</RequireAuth>
 					}
 				/>
@@ -137,7 +137,7 @@ const App = () => {
 				/>
 				<Route
 					path='/profile'
-					element={< Profile user={user} currentProfile={currentProfile} getProfile={getProfile} />}
+					element={< Profile user={user} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile} getProfile={getProfile} />}
 					
 				/>
 				<Route
