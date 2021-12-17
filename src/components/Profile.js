@@ -139,7 +139,7 @@ function Profile(props) {
                 <form onSubmit={handleEdit}>
                     <div>
                         <label htmlFor="name">Name</label>
-                        <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name}/>
+                        <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name}required/>
                     </div>
                     <div>
                         <label htmlFor="skills">Skills</label>

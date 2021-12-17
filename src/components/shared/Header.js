@@ -12,16 +12,6 @@ const linkStyle = {
 const authenticatedOptions = (
 	<>
 		<Nav.Link>
-			<Link to='change-password' style={linkStyle}>
-				Change Password
-			</Link>
-		</Nav.Link>
-		<Nav.Link>
-			<Link to='sign-out' style={linkStyle}>
-				Sign Out
-			</Link>
-		</Nav.Link>
-		<Nav.Link>
 			<Link to='profile' style={linkStyle}>
 				Profile
 			</Link>
@@ -29,6 +19,16 @@ const authenticatedOptions = (
 		<Nav.Link>
 			<Link to='jobs' style={linkStyle}>
 				Jobs
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to='change-password' style={linkStyle}>
+				Change Password
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to='sign-out' style={linkStyle}>
+				Sign Out
 			</Link>
 		</Nav.Link>
 	</>
@@ -60,7 +60,7 @@ const Header = ({ user, currentProfile }) => (
 	<Navbar bg='primary' variant='dark' expand='md'>
 		<Navbar.Brand>
             <Link to='/' style={linkStyle}>
-                react-auth-template
+                Job Hunter
             </Link>
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
