@@ -13,7 +13,7 @@ function JobForm(props) {
             </div>
             <div>
                 <label htmlFor="zipCode">Zip Code: </label>
-                <input type="text" name="zipCode" id="zipCode" onChange={props.handleChange} value={props.job.zipCode} />
+                <input type="text" name="zipCode" id="zipCode" minLength="5" maxLength="5" onChange={props.handleChange} value={props.job.zipCode} />
             </div>
             <div>
                 <label htmlFor="jobDescription">Job Description: </label>
