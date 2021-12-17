@@ -17,17 +17,17 @@ function JobCard (props) {
     }
     
     const deleteJob = () => {
+        deleteTask()
         fetch(`http://localhost:8000/jobs/${props.job._id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
         .then(() => props.getJobs())
         .catch(error => console.log(error))
-        deleteTask()
     }
 
     const deleteTask = () => {
-        fetch(`http://localhost:8000/tasks/delete-all/${props.job._id}}`, {
+        fetch(`http://localhost:8000/tasks/delete-all/${props.job._id}`, { // I'm in hell
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
