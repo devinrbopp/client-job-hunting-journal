@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import dateFormat, { masks } from "dateformat"
 
 
 function Task(props) {
@@ -32,7 +33,7 @@ function Task(props) {
         // setTaskArray((previousTask) => [...taskArray, newTask])
         let preJSONBody = {
             taskName: newTask.taskName,
-            deadline: newTask.deadline,
+            deadline: newTask.deadline.substring(0,10),
             notes: newTask.notes,
             owner: props.user._id, // props.user._id,
             jobId: props.jobId
@@ -96,7 +97,7 @@ function Task(props) {
         return (
             <div>
                 <h1>{task.taskName}</h1>
-                <h2 style={style} name="taskDeadline">Deadline: {task.deadline}</h2>
+                <h2 style={style} name="taskDeadline">Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy", true)}</h2>
 
                 <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
                 <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
@@ -118,7 +119,7 @@ function Task(props) {
             <form onSubmit={handleSubmit}>
                 {/* BUG: NEED TO RESET SELECT AFTER SUBMIT */}
                 <select name='taskName' value={newTask.taskName} onChange={handleChange} >
-                    <option value='null' >--Select a Task--</option>
+                    <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
                     <option value='Submit Resume' >Submit Resume</option>
                     <option value='Accept Offer' >Accept Offer</option>
                     <option value='Other Misc Task' >Other Misc Task</option>

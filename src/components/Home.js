@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { Route, Routes, Link } from 'react-router-dom'
+import dateFormat, { masks } from "dateformat"
 
 
 const Home = (props) => {
@@ -30,10 +31,19 @@ const Home = (props) => {
 	}, [])
 
 	const upcomingTasks = tasks.map(task => {
+		let style
+        let today = new Date(),
+            date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+        if (task.deadline.substr(0, 10) <= date) {
+            style = { color: 'red' }
+        } else {
+            style = { color: 'black' }
+        }
 		return (
 			<div>
-				<h1>{task.taskName}</h1>
-				<h2>Deadline: {task.deadline}</h2>
+				<h1><Link to={`job/${task.jobId._id}`}>{task.taskName}</Link> - <small>{task.jobId.jobTitle}, {task.jobId.company}</small></h1>
+				<h2 style={style}>Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy", true)}</h2>
+
 				<p>Notes: {task.notes}</p>
 			</div>
 		)
