@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Task from './Task';
-
 import apiUrl from '../apiConfig'
 
 function Profile(props) {    
@@ -8,6 +7,7 @@ function Profile(props) {
     /**************************************
 	 * DEFINE NEW PROFILE AND EDIT STATES *
 	 **************************************/	
+
     const [newProfile, setNewProfile] = useState({
         name: '',
         skills: [],
@@ -21,6 +21,7 @@ function Profile(props) {
 	 * HELPER FUNCTIONS  *
 	 *********************/	
 
+    // Set edit state to true on click
     const editProfile = (e) => {
         setEdit(true) 
         setNewProfile({
@@ -29,49 +30,53 @@ function Profile(props) {
             zipCode: props.currentProfile.zipCode,
             interviewQuestions: {},
             owner: props.user._id
-        })                      // Set edit state to true on click
+        })                      
     }
-    
+    // Set values in new profile state to entries
     const handleChange = (e) => {
-        setNewProfile({...newProfile, [e.target.name]: e.target.value}) // Set values in new profile state to entries
-        // props.setCurrentProfile({...props.currentProfile, [e.target.name]: e.target.value})
+        setNewProfile({...newProfile, [e.target.name]: e.target.value}) 
     }
 
     /*********************************
 	 * FUNCTION TO SET EDIT PROFILE  *
 	 *********************************/	
-    const handleEdit = (e) => {
-        e.preventDefault()                                      // Prevent refresh
 
-        let preJSONBody = {                         // Send data to the API in this object form
+    const handleEdit = (e) => {
+        e.preventDefault()       
+        // Send data to the API in this object form
+        let preJSONBody = {                         
             name: newProfile.name,
             skills: newProfile.skills.split(',').map(skill => skill.trim()),
             zipCode: newProfile.zipCode,
             interviewQuestions: newProfile.interviewQuestions,
-            owner: newProfile.owner      // Assigns a user to profile
+            owner: newProfile.owner      
         }
-        fetch(apiUrl + `/profiles/${props.currentProfile._id}`, {       // Fetch request to update profile
+        // Fetch request to update profile
+        fetch(apiUrl + `/profiles/${props.currentProfile._id}`, {       
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
         .then(() => {
-            console.log('is this hitting?')
-            setNewProfile({             // Reset profile state to empty state
+            // console.log('is this hitting?')
+            // Reset profile state to empty state
+            setNewProfile({             
                 name: '',
                 skills: [],
                 zipCode: '',
                 interviewQuestions: {},
                 owner: props.user._id
             })
-            setEdit(false)             // Set edit to false so edit form no longer shows
-            props.getProfile()        // Call getProfile function to show info
+            setEdit(false)             
+            props.getProfile()        
         })
         .catch(error => { console.log(error) })
     }
+
     /*************************************
 	 * FUNCTION TO CREATE FIRST PROFILE  *
 	 *************************************/	
+
     const handleSubmit = (e) => {       
         e.preventDefault()
         let preJSONBody = {
@@ -99,9 +104,11 @@ function Profile(props) {
         })
         .catch(error => { console.log(error) })
     }
-   /***********************
+
+    /***********************
 	 * PROFILE INFO FORMS  *
 	 ***********************/	
+
     let display 
     // If check to see if a profile exists
     // If doesn't exist, show form upon first login
@@ -109,22 +116,22 @@ function Profile(props) {
         display = (
             <form id='new-profile-form-container' onSubmit={handleSubmit} >
                 <div>
-                    <label htmlFor="name">Name</label>
-                    <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name} />
+                    <label htmlFor='name'>Name</label>
+                    <input onChange={handleChange} type='text' name='name' id='name' value={newProfile.name} />
                 </div>
                 <div>
-                    <label htmlFor="skills">Skills</label>
-                    <input onChange={handleChange} type="text" name="skills" id="skills" value={newProfile.skills} />
+                    <label htmlFor='skills'>Skills</label>
+                    <input onChange={handleChange} type='text' name='skills' id='skills' value={newProfile.skills} />
                 </div>
                 <div>
-                    <label htmlFor="zipCode">Zip Code</label>
-                    <input onChange={handleChange} type="text" name="zipCode" id="zipCode" value={newProfile.zipCode} />
+                    <label htmlFor='zipCode'>Zip Code</label>
+                    <input onChange={handleChange} type='text' name='zipCode' id='zipCode' value={newProfile.zipCode} />
                 </div>
-                <input type="submit" value="submit" />
+                <input type='submit' value='submit' />
             </form>
         )
     } 
-    // If profile exists, check if edit state is false
+        // If profile exists, check if edit state is false
         else {     
         // If edit state false, show profile info otherwise show form            
         if (edit === false){    
@@ -143,27 +150,25 @@ function Profile(props) {
                     <button onClick={editProfile}>Edit Profile</button>
                 </div>
             )
-        } else {            
-        
+        } else {                    
             display = (
                 <form id='edit-form-container' onSubmit={handleEdit}>
                     <div>
-                        <label htmlFor="name">Name</label>
-                        <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name}required/>
+                        <label htmlFor='name'>Name</label>
+                        <input onChange={handleChange} type='text' name='name' id='name' value={newProfile.name}required/>
                     </div>
                     <div>
-                        <label htmlFor="skills">Skills</label>
-                        <input onChange={handleChange} type="text" name="skills" id="skills" value={newProfile.skills} />
+                        <label htmlFor='skills'>Skills</label>
+                        <input onChange={handleChange} type='text' name='skills' id='skills' value={newProfile.skills} />
                     </div>
                     <div>
-                        <label htmlFor="zipCode">Zip Code</label>
-                        <input onChange={handleChange} type="text" minLength="5" maxLength="5" name="zipCode" id="zipCode" value={newProfile.zipCode} />
+                        <label htmlFor='zipCode'>Zip Code</label>
+                        <input onChange={handleChange} type='text' minLength='5' maxLength='5' name='zipCode' id='zipCode' value={newProfile.zipCode} />
                     </div>
-                    <input type="submit" value="submit" />
+                    <input type='submit' value='submit' />
                 </form>)
         }
     }
-
     return (
         <div>
             {display}

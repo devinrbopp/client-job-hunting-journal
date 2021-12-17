@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
 import JobForm from './JobForm';
-
 import apiUrl from '../apiConfig'
 
 function Jobs(props) {
@@ -9,12 +8,13 @@ function Jobs(props) {
     /*************************
 	 * DEFINE NEWJOB STATES  *
 	 *************************/	
+
     const [newJob, setNewJob] = useState({
-        jobTitle: "",
-        company: "",
-        zipCode: "",
+        jobTitle: '',
+        company: '',
+        zipCode: '',
         applied: false,
-        jobDescription: "",
+        jobDescription: '',
         owner: props.user._id
     })
 
@@ -34,6 +34,7 @@ function Jobs(props) {
     /***************************
 	 * POST CREATED JOB TO DB  *
 	 ***************************/
+
     const handleSubmit = (e) => {
         e.preventDefault()
         let preJSONBody = {
@@ -45,19 +46,19 @@ function Jobs(props) {
             jobDescription: newJob.jobDescription,
             owner: props.user._id
         }
-        fetch(apiUrl + "/jobs", {
-            method: "POST",
+        fetch(apiUrl + '/jobs', {
+            method: 'POST',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON' }
         })
             .then(response => response.json())
             .then(postedJob => {
                 setNewJob({
-                    jobTitle: "",
-                    company: "",
-                    zipCode: "",
+                    jobTitle: '',
+                    company: '',
+                    zipCode: '',
                     applied: false,
-                    jobDescription: "",
+                    jobDescription: '',
                     owner: props.user._id
                 })
                 props.getJobs()
@@ -68,17 +69,18 @@ function Jobs(props) {
     /*********************************************
 	 * ITERATE THROUGH JOBS TO DISPLAY ALL JOBS  *
 	 *********************************************/
+
     const allJobs = props.jobs.map(job => <JobCard job={job} user={props.user} getJobs={props.getJobs}/>)
-    console.log(allJobs)
+    // console.log(allJobs)
 
     return (
-        <div className="container-div">
+        <div className='container-div'>
             <div id='job-form-container'>
                 <h2>Add a new job:</h2>
                 <JobForm handleCheck={handleCheck} handleChange={handleChange} job={newJob} handleSubmit={handleSubmit} />
             </div>
 
-            <div className="job-cards">
+            <div className='job-cards'>
                 {allJobs}
             </div>
         </div>

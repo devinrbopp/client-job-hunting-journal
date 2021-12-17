@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Routes, Link } from 'react-router-dom'
 import dateFormat, { masks } from "dateformat"
-
 import apiUrl from '../apiConfig'
 
 const Home = (props) => {
-	// const { msgAlert, user } = props
 	const [tasks, setTasks] = useState([])
-	console.log('props in home', props)
+	// console.log('props in home', props)
 
 	useEffect(() => {
 		if (props.user) {
@@ -43,14 +41,13 @@ const Home = (props) => {
 		return (
 			<div>
 				<h1><Link to={`job/${task.jobId._id}`}>{task.taskName}</Link> - <small>{task.jobId.jobTitle}, {task.jobId.company}</small></h1>
-				<h2 style={style}>Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy", true)}</h2>
+				<h2 style={style}>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h2>
 
 				<p>Notes: {task.notes}</p>
 			</div>
 		)
 	}).slice(0,5)
 
-	
 	return (
 		<>
 			{props.user ? <h1>Upcoming Tasks:</h1> : <h1>Welcome</h1>}
@@ -60,5 +57,4 @@ const Home = (props) => {
 		</>
 	)
 }
-
 export default Home
