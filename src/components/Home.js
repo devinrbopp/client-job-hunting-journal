@@ -53,7 +53,7 @@ const Home = (props) => {
 	return (
 		<>
 			<h2>Home Page</h2>
-			<h3>Upcoming Tasks:</h3>
+			{props.user ? <h3>Upcoming Tasks:</h3> : <h3>Welcome</h3>}
 			{upcomingTasks}
 		</>
 	)

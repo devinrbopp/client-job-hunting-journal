@@ -5,11 +5,11 @@ function JobForm(props) {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <label htmlFor="jobTitle">Job Title: </label>
-                <input type="text" name="jobTitle" id="jobTitle" onChange={props.handleChange} value={props.job.jobTitle} />
+                <input type="text" name="jobTitle" id="jobTitle" onChange={props.handleChange} value={props.job.jobTitle}required />
             </div>
             <div>
                 <label htmlFor="company">Company: </label>
-                <input type="text" name="company" id="company" onChange={props.handleChange} value={props.job.company} />
+                <input type="text" name="company" id="company" onChange={props.handleChange} value={props.job.company}required />
             </div>
             <div>
                 <label htmlFor="zipCode">Zip Code: </label>
