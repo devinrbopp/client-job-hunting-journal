@@ -34,7 +34,7 @@ function Task(props) {
         let preJSONBody = {
             taskName: newTask.taskName,
             deadline: newTask.deadline.substring(0,10),
-            notes: newTask.notes,
+            notes: '',
             owner: props.user._id, // props.user._id,
             jobId: props.jobId
 
@@ -78,6 +78,22 @@ function Task(props) {
             .catch(error => console.log(error))
     }
 
+    // handle changes to the notepad
+    const handleNotepad = (e) => {
+        let preJSONBody = {
+            notes: e.target.value
+        }
+        console.log('notepad change', e.target.value)
+        console.log(e.target.className)
+        fetch(`http://localhost:8000/tasks/${e.target.className}`, {
+            method: 'PATCH',
+            body: JSON.stringify(preJSONBody),
+            headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
+        })
+            .then(() => props.getTasks())
+            .catch(error => console.log(error))
+    }
+
     // Iterate through task array to display all tasks created 
     props.tasks.sort(function compare(a, b) {
         let dateA = new Date(a.deadline)
@@ -98,8 +114,7 @@ function Task(props) {
             <div>
                 <h1>{task.taskName}</h1>
                 <h2 style={style} name="taskDeadline">Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy", true)}</h2>
-
-                <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
+                <textarea placeholder={"Take notes here. Notes are saved automatically."} onChange={handleNotepad} className={task._id} name="notepad" id="" cols="30" rows="10">{task.notes}</textarea>
                 <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
                 <button onClick={() => deleteTask(task)}>Delete Task</button>
 
@@ -123,11 +138,11 @@ function Task(props) {
                     <option value='Submit Resume' >Submit Resume</option>
                     <option value='Accept Offer' >Accept Offer</option>
                     <option value='Other Misc Task' >Other Misc Task</option>
-                </select>
+                </select><br />
                 <label htmlFor='deadline'>Deadline: </label>
-                <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} />
+                <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
                 <label htmlFor='notes' >Notes:</label>
-                <input type='text' name='notes' id='notes' value={newTask.notes} onChange={handleChange} />
+                {/* <input type='text' name='notes' id='notes' value={newTask.notes} onChange={handleChange} /><br /> */}
                 <button type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
             </form>
             <div className='added-tasks'>
