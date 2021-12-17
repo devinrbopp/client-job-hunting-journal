@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Task from './Task';
 
-
-
 function Profile(props) {    
 
     /**************************************
@@ -23,7 +21,13 @@ function Profile(props) {
 
     const editProfile = (e) => {
         setEdit(true) 
-        setNewProfile(props.currentProfile)                      // Set edit state to true on click
+        setNewProfile({
+            name: props.currentProfile.name,
+            skills: props.currentProfile.skills.join(', '),
+            zipCode: props.currentProfile.zipCode,
+            interviewQuestions: {},
+            owner: props.user._id
+        })                      // Set edit state to true on click
     }
     
     const handleChange = (e) => {
@@ -36,11 +40,10 @@ function Profile(props) {
 	 *********************************/	
     const handleEdit = (e) => {
         e.preventDefault()                                      // Prevent refresh
-        // console.log('this is currentProfile.owner: ', props.currentProfile.owner)
-        // console.log('this is user._id: ', props.user._id)
+
         let preJSONBody = {                         // Send data to the API in this object form
             name: newProfile.name,
-            skills: newProfile.skills,
+            skills: newProfile.skills.split(',').map(skill => skill.trim()),
             zipCode: newProfile.zipCode,
             interviewQuestions: newProfile.interviewQuestions,
             owner: newProfile.owner      // Assigns a user to profile
@@ -71,7 +74,7 @@ function Profile(props) {
         e.preventDefault()
         let preJSONBody = {
             name: newProfile.name,
-            skills: newProfile.skills,
+            skills: newProfile.skills.split(',').map(skill => skill.trim()),
             zipCode: newProfile.zipCode,
             interviewQuestions: newProfile.interviewQuestions,
             owner: newProfile.owner
@@ -123,11 +126,16 @@ function Profile(props) {
         else {     
         // If edit state false, show profile info otherwise show form            
         if (edit === false){    
+            const skillList = props.currentProfile.skills.map(skill => {
+                return (<li>{skill}</li>)
+            })
             display = (
                 <div>
                     <h1>profile</h1>
                     <h2>{props.currentProfile.name}</h2>
-                    <h3>{props.currentProfile.skills}</h3>
+                    <ul>
+                        {skillList}
+                    </ul>
                     <h3>{props.currentProfile.zipCode}</h3>
                     <h3>{props.currentProfile.interviewQuestions}</h3>
                     <button onClick={editProfile}>Edit Profile</button>
@@ -153,46 +161,6 @@ function Profile(props) {
                 </form>)
         }
     }
-
-    // START OF EDIT 
-    // useEffect(() => {
-    //     setNewProfile({
-    //         name: 
-    //     })
-    // })
-    
-    //map(dueDate) function {
-    // for all due dates, pick the closest 5
-    // query dates.sort
-    // return first 5
-    /* 
-    */
-    //}
-
- /*let content;
-
-    if (profile === null){
-        return profile creation form
-        set content = form
-    } else {
-        return profile
-        set content to actual profile
-        <h1>Profile Page</h1>
-
-        Tasks, user info, last saved job
-        Tasks stored in state
-        User info passed as a prop from app.js
-        Last saved job passed as a prop from 
-
-        <h2> props.user.name</h2>
-        <ul>
-            <li>props.user.location</li>
-            <li>props.user.techStack</li>
-        </ul>
-        <p>prop.lastEnteredJob</p>
-        <Task />
-    }
-*/
 
     return (
         <div>
