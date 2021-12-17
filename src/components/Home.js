@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, Routes, Link } from 'react-router-dom'
 import dateFormat, { masks } from "dateformat"
 
+import apiUrl from '../apiConfig'
 
 const Home = (props) => {
 	// const { msgAlert, user } = props
@@ -10,7 +11,7 @@ const Home = (props) => {
 
 	useEffect(() => {
 		if (props.user) {
-			fetch('http://localhost:8000/tasks', {
+			fetch(apiUrl + '/tasks', {
 				headers: {
 					'Authorization': 'Bearer ' + props.user.token 
 				}

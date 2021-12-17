@@ -3,6 +3,8 @@ import Tasks from './Task';
 import { useParams } from 'react-router-dom'
 import JobForm from './JobForm';
 
+import apiUrl from '../apiConfig'
+
 function JobDetail(props) {
     /******************
      * DEFINE STATES  *
@@ -27,7 +29,7 @@ function JobDetail(props) {
 
     // FETCH TO RETRIEVE LIST OF TASKS
     const getTasks = () => {
-        fetch('http://localhost:8000/tasks', {
+        fetch(apiUrl + '/tasks', {
             headers: {
                 'Authorization': 'Bearer ' + props.user.token 
             }
@@ -89,7 +91,7 @@ function JobDetail(props) {
             jobDescription: editJob.jobDescription,
             owner: editJob.owner
         }
-        fetch(`http://localhost:8000/jobs/${editJob._id}`, {
+        fetch(apiUrl + `/jobs/${editJob._id}`, {
             method: "PATCH",
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }

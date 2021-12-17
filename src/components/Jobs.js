@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import JobCard from './JobCard';
 import JobForm from './JobForm';
 
+import apiUrl from '../apiConfig'
+
 function Jobs(props) {
 
     /*************************
@@ -43,7 +45,7 @@ function Jobs(props) {
             jobDescription: newJob.jobDescription,
             owner: props.user._id
         }
-        fetch("http://localhost:8000/jobs", {
+        fetch(apiUrl + "/jobs", {
             method: "POST",
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON' }

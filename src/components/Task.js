@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dateFormat, { masks } from "dateformat"
 
+import apiUrl from '../apiConfig'
 
 function Task(props) {
 
@@ -39,7 +40,7 @@ function Task(props) {
             jobId: props.jobId
 
         }
-        fetch(`http://localhost:8000/tasks`, { //change jobId to prop.jobId after job page completed
+        fetch(apiUrl + `/tasks`, { //change jobId to prop.jobId after job page completed
             method: 'POST',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
@@ -58,7 +59,7 @@ function Task(props) {
             completed: true
         }
         console.log('e.target!', e._id)
-        fetch(`http://localhost:8000/tasks/${e._id}`, {
+        fetch(apiUrl + `/tasks/${e._id}`, {
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
@@ -70,7 +71,7 @@ function Task(props) {
     // Delete task
     const deleteTask = (e) => {
         console.log('This is e: ', e._id)
-        fetch(`http://localhost:8000/tasks/${e._id}`, {
+        fetch(apiUrl + `/tasks/${e._id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
@@ -85,7 +86,7 @@ function Task(props) {
         }
         console.log('notepad change', e.target.value)
         console.log(e.target.className)
-        fetch(`http://localhost:8000/tasks/${e.target.className}`, {
+        fetch(apiUrl + `/tasks/${e.target.className}`, {
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }

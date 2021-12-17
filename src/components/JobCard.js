@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
+import apiUrl from '../apiConfig'
+
 function JobCard (props) {
 
     const markApplied = () => {
         let preJSONBody = {
             applied: true
         }
-        fetch(`http://localhost:8000/jobs/${props.job._id}`, {
+        fetch(apiUrl + `/jobs/${props.job._id}`, {
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
@@ -18,7 +20,7 @@ function JobCard (props) {
     
     const deleteJob = () => {
         deleteTask()
-        fetch(`http://localhost:8000/jobs/${props.job._id}`, {
+        fetch(apiUrl + `/jobs/${props.job._id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
@@ -27,7 +29,7 @@ function JobCard (props) {
     }
 
     const deleteTask = () => {
-        fetch(`http://localhost:8000/tasks/delete-all/${props.job._id}`, { // I'm in hell
+        fetch(apiUrl + `/tasks/delete-all/${props.job._id}`, { // I'm in hell
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })

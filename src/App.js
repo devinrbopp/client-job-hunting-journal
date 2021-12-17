@@ -4,6 +4,9 @@ import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import './index.css'
 
+import apiUrl from './apiConfig'
+
+
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/shared/Header'
@@ -60,7 +63,7 @@ const App = () => {
 	const getProfile = () => {
 		if (user != null) {
 			// Fetch request into db using userId as a param
-			fetch(`http://localhost:8000/profiles/${user._id}`) 
+			fetch(apiUrl + `/profiles/${user._id}`) 
 			.then(profile => {
 				console.log('PROFILE RETRIEVED FROM SERVER')
 				return profile.json()
@@ -80,7 +83,7 @@ const App = () => {
 	 **********************************************/	
 	const getJobs = () => {
 		if (user != null) {
-			fetch('http://localhost:8000/jobs/user', {		
+			fetch(apiUrl + '/jobs/user', {		
 				// Requires user to be signed in
 				headers: {
 					'Authorization': 'Bearer ' + user.token 

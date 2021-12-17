@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Task from './Task';
 
+import apiUrl from '../apiConfig'
+
 function Profile(props) {    
 
     /**************************************
@@ -48,7 +50,7 @@ function Profile(props) {
             interviewQuestions: newProfile.interviewQuestions,
             owner: newProfile.owner      // Assigns a user to profile
         }
-        fetch(`http://localhost:8000/profiles/${props.currentProfile._id}`, {       // Fetch request to update profile
+        fetch(apiUrl + `/profiles/${props.currentProfile._id}`, {       // Fetch request to update profile
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
@@ -79,7 +81,7 @@ function Profile(props) {
             interviewQuestions: newProfile.interviewQuestions,
             owner: newProfile.owner
         }
-        fetch('http://localhost:8000/profiles', {
+        fetch(apiUrl + '/profiles', {
             method: 'POST',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON'}
