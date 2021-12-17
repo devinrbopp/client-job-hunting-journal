@@ -111,41 +111,37 @@ function Task(props) {
             style = { color: 'black' }
         }
         return (
-            <div>
+            <div className='task-card'>
                 <h1>{task.taskName}</h1>
                 <h2 style={style} name="taskDeadline">Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy", true)}</h2>
-                <textarea placeholder={"Take notes here. Notes are saved automatically."} onChange={handleNotepad} className={task._id} name="notepad" id="" cols="30" rows="10">{task.notes}</textarea>
-                <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
+                <textarea placeholder={"Take notes here. Notes are saved automatically."} onChange={handleNotepad} className={task._id} name="notepad" id="" rows="10">{task.notes}</textarea>
+                <br />
+                {task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
                 <button onClick={() => deleteTask(task)}>Delete Task</button>
-
             </div>
         )
     })
-
-
 
     /*********************
      * TASK CREATION FORM *
      **********************/
 
-
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                {/* BUG: NEED TO RESET SELECT AFTER SUBMIT */}
-                <select name='taskName' value={newTask.taskName} onChange={handleChange} >
-                    <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
-                    <option value='Submit Resume' >Submit Resume</option>
-                    <option value='Accept Offer' >Accept Offer</option>
-                    <option value='Other Misc Task' >Other Misc Task</option>
-                </select><br />
-                <label htmlFor='deadline'>Deadline: </label>
-                <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
-                <label htmlFor='notes' >Notes:</label>
-                {/* <input type='text' name='notes' id='notes' value={newTask.notes} onChange={handleChange} /><br /> */}
-                <button type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
-            </form>
-            <div className='added-tasks'>
+            <div className='task-form-container'>
+                <form onSubmit={handleSubmit}>
+                    <select name='taskName' value={newTask.taskName} onChange={handleChange} >
+                        <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
+                        <option value='Submit Resume' >Submit Resume</option>
+                        <option value='Accept Offer' >Accept Offer</option>
+                        <option value='Other Misc Task' >Other Misc Task</option>
+                    </select><br />
+                    <label htmlFor='deadline'>Deadline: </label>
+                    <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
+                    <button type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
+                </form>
+            </div>
+            <div className='task-cards'>
                 {tasks}
             </div>
         </div>

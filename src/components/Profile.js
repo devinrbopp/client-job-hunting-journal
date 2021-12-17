@@ -105,7 +105,7 @@ function Profile(props) {
     // If doesn't exist, show form upon first login
     if (props.currentProfile === undefined) {
         display = (
-            <form onSubmit={handleSubmit} >
+            <form id='new-profile-form-container' onSubmit={handleSubmit} >
                 <div>
                     <label htmlFor="name">Name</label>
                     <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name} />
@@ -130,13 +130,13 @@ function Profile(props) {
                 return (<li>{skill}</li>)
             })
             display = (
-                <div>
-                    <h1>profile</h1>
-                    <h2>{props.currentProfile.name}</h2>
+                <div id='profile-container'>
+                    <h1>{props.currentProfile.name}'s Profile</h1>
+                    <h3>Skills:</h3>
                     <ul>
                         {skillList}
                     </ul>
-                    <h3>{props.currentProfile.zipCode}</h3>
+                    <h4>Zip Code: {props.currentProfile.zipCode}</h4>
                     <h3>{props.currentProfile.interviewQuestions}</h3>
                     <button onClick={editProfile}>Edit Profile</button>
                 </div>
@@ -144,7 +144,7 @@ function Profile(props) {
         } else {            
         
             display = (
-                <form onSubmit={handleEdit}>
+                <form id='edit-form-container' onSubmit={handleEdit}>
                     <div>
                         <label htmlFor="name">Name</label>
                         <input onChange={handleChange} type="text" name="name" id="name" value={newProfile.name}required/>
