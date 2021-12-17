@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
     // YOU MUST CHANGE PRODUCTION URL WHEN DEPLOYING
-	production: 'https://minmax-job-hunter-api.herokuapp.com/',
+	production: 'https://minmax-job-hunter-api.herokuapp.com',
 	development: 'http://localhost:8000',
 }
 
