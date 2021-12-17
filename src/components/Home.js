@@ -42,7 +42,8 @@ const Home = (props) => {
 		return (
 			<div>
 				<h1><Link to={`job/${task.jobId._id}`}>{task.taskName}</Link> - <small>{task.jobId.jobTitle}, {task.jobId.company}</small></h1>
-				<h2>Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy")}</h2>
+				<h2 style={style}>Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy", true)}</h2>
+
 				<p>Notes: {task.notes}</p>
 			</div>
 		)
