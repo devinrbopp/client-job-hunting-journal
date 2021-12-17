@@ -36,7 +36,9 @@ function JobDetail(props) {
             .then(tasks => {
                 console.log('THESE ARE TASKS BEFORE THEY ARE FILTERED', tasks)
                 return tasks.filter(task => {
-                    return task.jobId === id
+                    console.log(task.jobId._id)
+                    console.log(id)
+                    return task.jobId._id == id
                 })
             })
             .then(theseTasks => {

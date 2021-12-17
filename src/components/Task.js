@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import dateFormat, { masks } from "dateformat"
 
 
 function Task(props) {
@@ -96,7 +97,7 @@ function Task(props) {
         return (
             <div>
                 <h1>{task.taskName}</h1>
-                <h2 style={style} name="taskDeadline">Deadline: {task.deadline}</h2>
+                <h2 style={style} name="taskDeadline">Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy")}</h2>
 
                 <h2>General notes: {task.notes}</h2> {/* Research better/bigger text input field that saves */}
                 <h2>{task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}</h2>
