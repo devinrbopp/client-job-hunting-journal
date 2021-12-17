@@ -133,7 +133,7 @@ function Profile(props) {
                 <div id='profile-container'>
                     <h1>{props.currentProfile.name}'s Profile</h1>
                     <h3>Skills:</h3>
-                    <ul>
+                    <ul id='skill-ul'>
                         {skillList}
                     </ul>
                     <h4>Zip Code: {props.currentProfile.zipCode}</h4>
