@@ -118,7 +118,7 @@ function Task(props) {
             <form onSubmit={handleSubmit}>
                 {/* BUG: NEED TO RESET SELECT AFTER SUBMIT */}
                 <select name='taskName' value={newTask.taskName} onChange={handleChange} >
-                    <option value='null' >--Select a Task--</option>
+                    <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
                     <option value='Submit Resume' >Submit Resume</option>
                     <option value='Accept Offer' >Accept Offer</option>
                     <option value='Other Misc Task' >Other Misc Task</option>
