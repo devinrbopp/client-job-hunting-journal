@@ -23,6 +23,15 @@ function JobCard (props) {
         })
         .then(() => props.getJobs())
         .catch(error => console.log(error))
+        deleteTask()
+    }
+
+    const deleteTask = () => {
+        fetch(`http://localhost:8000/tasks/delete-all/${props.job._id}}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
+        })
+            .catch(error => console.log(error))
     }
 
     //map function to display all the job cards
