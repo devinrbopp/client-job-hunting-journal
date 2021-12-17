@@ -8,7 +8,6 @@ const linkStyle = {
     textDecoration: 'none'
 }
 
-
 const authenticatedOptions = (
 	<>
 		<Nav.Link>
@@ -55,7 +54,6 @@ const alwaysOptions = (
 	</>
 )
 
-
 const Header = ({ user, currentProfile }) => (
 	<Navbar bg='primary' variant='dark' expand='md'>
 		<Navbar.Brand>
@@ -75,6 +73,4 @@ const Header = ({ user, currentProfile }) => (
 		</Navbar.Collapse>
 	</Navbar>
 	)
-			
-					
 export default Header

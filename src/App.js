@@ -3,9 +3,7 @@ import React, { useState, Fragment, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import './index.css'
-
 import apiUrl from './apiConfig'
-
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
@@ -21,7 +19,6 @@ import Jobs from './components/Jobs'
 import JobDetail from './components/JobDetail'
 
 
-
 const App = () => {
 
     /************************************
@@ -35,10 +32,10 @@ const App = () => {
 	
 
 
-	console.log('user in app', user)
-	console.log('message alerts', msgAlerts)
+	// console.log('user in app', user)
+	// console.log('message alerts', msgAlerts)
 	const clearUser = () => {
-		console.log('clear user ran')
+		// console.log('clear user ran')
 		setUser(null)
 	}
 
@@ -60,17 +57,18 @@ const App = () => {
 	/*****************************************
 	 * FUNCTION TO GET USER PROFILE FROM DB  *
 	 *****************************************/	
+
 	const getProfile = () => {
 		if (user != null) {
 			// Fetch request into db using userId as a param
 			fetch(apiUrl + `/profiles/${user._id}`) 
 			.then(profile => {
-				console.log('PROFILE RETRIEVED FROM SERVER')
+				// console.log('PROFILE RETRIEVED FROM SERVER')
 				return profile.json()
 			})
 			.then(profile =>{
 				// Set current profile to the profile retrieved from fetch req
-				console.log('this is profile:', profile)
+				// console.log('this is profile:', profile)
 				setCurrentProfile(profile[0]) 				
 				return 'complete'
 			})
@@ -81,6 +79,7 @@ const App = () => {
 	/**********************************************
 	 * FUNCTION TO GET USER'S SAVED JOBS FROM DB  *
 	 **********************************************/	
+
 	const getJobs = () => {
 		if (user != null) {
 			fetch(apiUrl + '/jobs/user', {		
@@ -90,11 +89,11 @@ const App = () => {
 				}
 			})
 				.then(jobs => {
-					console.log('JOBS RETRIEVED FROM SERVER', jobs)
+					// console.log('JOBS RETRIEVED FROM SERVER', jobs)
 					return jobs.json()						
 				})
 				.then(jobs => {
-					console.log('this is jobs: ', jobs)
+					// console.log('this is jobs: ', jobs)
 					setJobs(jobs)							
 				})
 				.catch(error => console.log(error))
@@ -104,8 +103,9 @@ const App = () => {
 	/************************************************
 	 * HOOK TO RUN FUNCTIONS WHENEVER USER LOGS IN  *
 	 ************************************************/	
+
 	useEffect(() => {
-		console.log('i am about to run getProfile')
+		// console.log('I am about to run getProfile')
 		getProfile()
 		getJobs()
 	}, [user])
@@ -113,6 +113,7 @@ const App = () => {
 	/*******************************
 	 * RENDER PAGES AND SET ROUTES *
 	 *******************************/	
+
 	return (
 		<Fragment>
 			<Header user={user} currentProfile={currentProfile} />

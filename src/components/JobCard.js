@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-
 import apiUrl from '../apiConfig'
 
 function JobCard (props) {
@@ -37,7 +36,6 @@ function JobCard (props) {
     }
 
     //map function to display all the job cards
-
     return (
         <div className={`job-card-container ${props.job.applied ? 'applied-true' : 'applied-false'} `}>
             <h1> <Link to={`/job/${props.job._id}`}> {props.job.jobTitle} - {props.job.company}</Link></h1>

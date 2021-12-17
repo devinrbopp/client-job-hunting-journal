@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import dateFormat, { masks } from "dateformat"
-
+import dateFormat, { masks } from 'dateformat'
 import apiUrl from '../apiConfig'
 
 function Task(props) {
@@ -10,13 +9,11 @@ function Task(props) {
      *****************/
 
     const [taskArray, setTaskArray] = useState([])
-
     const [taskList, setTaskList] = useState([
         { taskName: 'Submit resume', deadline: '', notes: '' },
         { taskName: 'Interview Prep', deadline: '', notes: '' },
         { taskName: 'New thing', deadline: '', notes: '' }
     ])
-
     const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '', owner: props.user._id, jobId: props.jobId })
 
     /********************
@@ -27,26 +24,23 @@ function Task(props) {
     const handleChange = (e) => {
         setNewTask({ ...newTask, [e.target.name]: e.target.value })
     }
-
     // Post the created task to database
     const handleSubmit = (e) => {
         e.preventDefault()
-        // setTaskArray((previousTask) => [...taskArray, newTask])
         let preJSONBody = {
             taskName: newTask.taskName,
             deadline: newTask.deadline.substring(0,10),
             notes: '',
-            owner: props.user._id, // props.user._id,
+            owner: props.user._id,
             jobId: props.jobId
-
         }
-        fetch(apiUrl + `/tasks`, { //change jobId to prop.jobId after job page completed
+        fetch(apiUrl + `/tasks`, { 
             method: 'POST',
             body: JSON.stringify(preJSONBody),
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
         })
             .then(response => {
-                console.log(response.json())
+                // console.log(response.json())
                 setNewTask({ taskName: null, deadline: '', notes: '', owner: props.user._id, jobId: props.jobId })
                 props.getJobs()
             })
@@ -58,7 +52,7 @@ function Task(props) {
         let preJSONBody = {
             completed: true
         }
-        console.log('e.target!', e._id)
+        // console.log('e.target!', e._id)
         fetch(apiUrl + `/tasks/${e._id}`, {
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
@@ -70,7 +64,7 @@ function Task(props) {
 
     // Delete task
     const deleteTask = (e) => {
-        console.log('This is e: ', e._id)
+        // console.log('This is e: ', e._id)
         fetch(apiUrl + `/tasks/${e._id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/JSON', 'Authorization': 'Bearer ' + props.user.token }
@@ -84,8 +78,8 @@ function Task(props) {
         let preJSONBody = {
             notes: e.target.value
         }
-        console.log('notepad change', e.target.value)
-        console.log(e.target.className)
+        // console.log('notepad change', e.target.value)
+        // console.log(e.target.className)
         fetch(apiUrl + `/tasks/${e.target.className}`, {
             method: 'PATCH',
             body: JSON.stringify(preJSONBody),
@@ -114,8 +108,8 @@ function Task(props) {
         return (
             <div className='task-card'>
                 <h1>{task.taskName}</h1>
-                <h2 style={style} name="taskDeadline">Deadline: {dateFormat(task.deadline, "dddd, mmmm dS, yyyy", true)}</h2>
-                <textarea placeholder={"Take notes here. Notes are saved automatically."} onChange={handleNotepad} className={task._id} name="notepad" id="" rows="10">{task.notes}</textarea>
+                <h2 style={style} name='taskDeadline'>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h2>
+                <textarea placeholder={'Take notes here. Notes are saved automatically.'} onChange={handleNotepad} className={task._id} name='notepad' id='' rows='10'>{task.notes}</textarea>
                 <br />
                 {task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
                 <button onClick={() => deleteTask(task)}>Delete Task</button>
