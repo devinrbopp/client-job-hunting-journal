@@ -1,10 +1,37 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+.page-body {
+  background-color: whitesmoke;
+  height: 100vh;
+  text-align: left;
+  padding: 10px 0 0 20px;
+  /* margin: 100px; */
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+#skill-ul{
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.job-form-input {
+  margin: 10px 0;
+  display: grid;
+  /* justify-content: center;
+  align-items: baseline; */
+  grid-template-columns: 1fr 1fr;
+  justify-items: end;
+}
+
+.job-form-label {
+  margin-right: 5px;
+}
+
+.job-form-field {
+  justify-self: start;
 }
 
 code {

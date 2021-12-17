@@ -102,33 +102,29 @@ function JobDetail(props) {
             .catch(error => console.log(error))
     }
 
-    let content
+    let jobInfo
     // If check to display either form or info
     if (editForm) {
-        content = (
+        jobInfo = (
             <JobForm handleCheck={handleCheck} handleChange={handleChange} job={editJob} handleSubmit={handleSubmit} />
         )
     } else {
-        content = (
+        jobInfo = (
             <>
-                <div className="job-description-div">
-                    <p>{currentJob[0].jobTitle}</p>
-                    <p>{currentJob[0].company}</p>
-                    <p>{currentJob[0].jobDescription}</p>
+                <div className="job-div">
+                    <h1>{currentJob[0].jobTitle} - {currentJob[0].company}</h1>
+                    <p className='job-description'>{currentJob[0].jobDescription}</p>
                     <p>Applied: {currentJob[0].applied ? 'Yes' : 'No'}</p>
                 </div>
                 <button onClick={editToggle}>Edit Job Details</button>
-                <div className="general-notes">
-                    <h2>General notes box</h2>
-                </div>
             </>
         )
     }
 
     return (
         <div>
-            <h1>This is job detail Page</h1>
-            {content}
+            {jobInfo}
+            <hr />
             <Tasks getTasks={getTasks} jobId={id} tasks={tasks} user={props.user} getJobs={props.getJobs} />
         </div>
     )

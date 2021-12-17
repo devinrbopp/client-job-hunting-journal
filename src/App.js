@@ -2,6 +2,7 @@
 import React, { useState, Fragment, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
+import './index.css'
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
@@ -112,46 +113,48 @@ const App = () => {
 	return (
 		<Fragment>
 			<Header user={user} currentProfile={currentProfile} />
-			<Routes>
-				<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
-				<Route
-					path='/sign-up'
-					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
-				/>
-				<Route
-					path='/sign-in'
-					element={<SignIn msgAlert={msgAlert} setUser={setUser} getProfile={getProfile}/>}
-				/>
-				<Route
-					path='/sign-out'
-					element={
-						<RequireAuth user={user}>
-							<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} setCurrentProfile={setCurrentProfile} />
-						</RequireAuth>
-					}
-				/>
-				<Route
-					path='/change-password'
-					element={
-						<RequireAuth user={user}>
-							<ChangePassword msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/>
-				<Route
-					path='/profile'
-					element={< Profile user={user} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile} getProfile={getProfile} />}
+			<div className='page-body'>
+				<Routes>
+					<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
+					<Route
+						path='/sign-up'
+						element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
+					/>
+					<Route
+						path='/sign-in'
+						element={<SignIn msgAlert={msgAlert} setUser={setUser} getProfile={getProfile}/>}
+					/>
+					<Route
+						path='/sign-out'
+						element={
+							<RequireAuth user={user}>
+								<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} setCurrentProfile={setCurrentProfile} />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path='/change-password'
+						element={
+							<RequireAuth user={user}>
+								<ChangePassword msgAlert={msgAlert} user={user} />
+							</RequireAuth>}
+					/>
+					<Route
+						path='/profile'
+						element={< Profile user={user} currentProfile={currentProfile} setCurrentProfile={setCurrentProfile} getProfile={getProfile} />}
+						
+					/>
+					<Route
+						path='/jobs'
+						element={< Jobs user={user} jobs={jobs} getJobs={getJobs} />}
+					/>
+					<Route
+						path='/job/:id'
+						element={< JobDetail jobs={jobs} user={user} getJobs={getJobs} />}
+					/>
 					
-				/>
-				<Route
-					path='/jobs'
-					element={< Jobs user={user} jobs={jobs} getJobs={getJobs} />}
-				/>
-				<Route
-					path='/job/:id'
-					element={< JobDetail jobs={jobs} user={user} getJobs={getJobs} />}
-				/>
-				
-			</Routes>
+				</Routes>
+			</div>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert
 					key={msgAlert.id}

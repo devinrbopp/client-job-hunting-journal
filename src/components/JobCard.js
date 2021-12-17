@@ -37,7 +37,7 @@ function JobCard (props) {
     //map function to display all the job cards
 
     return (
-        <div className="JobCard-container">
+        <div className={`job-card-container ${props.job.applied ? 'applied-true' : 'applied-false'} `}>
             <h1> <Link to={`/job/${props.job._id}`}> {props.job.jobTitle} - {props.job.company}</Link></h1>
             <p>{props.job.applied ? 'Applied!' : <button onClick={markApplied}>Mark as Applied</button>}</p>
             <button onClick={deleteJob}>Delete</button>

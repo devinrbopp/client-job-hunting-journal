@@ -16,21 +16,6 @@ function Jobs(props) {
         owner: props.user._id
     })
 
-    /*handleChange{
-        setNewJob({ ...newJob, [e.target.name]: e.target.value })
-    }
-
-    handleCheck{
-        setNewJob({ ...newJob, [e.target.name]: e.target.checked }) (? not sure if this is right)
-        
-    }
-    handleSubmit{
-        add newJob to Job state array
-        API call to post
-        reset new job to empty values
-    }
-    */
-
     /*********************
 	 * HELPER FUNCTIONS  *
 	 *********************/
@@ -86,8 +71,10 @@ function Jobs(props) {
 
     return (
         <div className="container-div">
-            <h2>Add a new job:</h2>
-            <JobForm handleCheck={handleCheck} handleChange={handleChange} job={newJob} handleSubmit={handleSubmit} />
+            <div id='job-form-container'>
+                <h2>Add a new job:</h2>
+                <JobForm handleCheck={handleCheck} handleChange={handleChange} job={newJob} handleSubmit={handleSubmit} />
+            </div>
 
             <div className="job-cards">
                 {allJobs}

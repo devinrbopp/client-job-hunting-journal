@@ -52,9 +52,10 @@ const Home = (props) => {
 	
 	return (
 		<>
-			<h2>Home Page</h2>
-			{props.user ? <h3>Upcoming Tasks:</h3> : <h3>Welcome</h3>}
-			{upcomingTasks}
+			{props.user ? <h1>Upcoming Tasks:</h1> : <h1>Welcome</h1>}
+			<div className='upcoming-tasks-container'>
+				{upcomingTasks}
+			</div>
 		</>
 	)
 }
