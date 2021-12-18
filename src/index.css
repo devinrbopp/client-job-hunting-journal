@@ -55,6 +55,7 @@
 
 .job-form-label {
   min-width: 135px;
+  vertical-align: top;
 }
 
 .job-form-field {

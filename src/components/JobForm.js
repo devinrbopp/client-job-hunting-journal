@@ -15,7 +15,8 @@ function JobForm(props) {
             </div>
             <div className='job-form-input'>
                 <label className='job-form-label' htmlFor='jobDescription'>Job Description: </label>
-                <input className='job-form-field' type='text' name='jobDescription' id='jobDescription' onChange={props.handleChange} value={props.job.jobDescription} />
+                <textarea placeholder='You can paste the full contents of a job description here.' className='job-form-field' name='jobDescription' id='jobDescription' onChange={props.handleChange} value={props.job.jobDescription}></textarea>
+                {/* <input className='job-form-field' type='text' name='jobDescription' id='jobDescription' onChange={props.handleChange} value={props.job.jobDescription} /> */}
             </div>
             <div className='job-form-input'>
                 <label id='applied-label' className='job-form-label' htmlFor='applied'>Applied </label>
