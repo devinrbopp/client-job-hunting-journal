@@ -102,6 +102,29 @@ textarea {
   white-space: pre-line;
 }
 
+#task-name-select {
+  margin-left: 5px;
+  height: 25px;
+  width: 200px;
+}
+
+#deadline {
+  height: 25px;
+  width: 200px;
+  display: block;
+  margin-left: 5px;
+}
+
+.task-form-label {
+  display: block;
+  padding-bottom: 5px;
+  margin-left: 5px;
+}
+
+#task-submit {
+  margin-left: 5px;
+}
+
 .job-description {
   white-space: pre-line;
 }
