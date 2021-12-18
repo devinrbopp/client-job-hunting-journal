@@ -35,12 +35,12 @@ function JobCard (props) {
             .catch(error => console.log(error))
     }
 
-    //map function to display all the job cards
     return (
         <div className={`job-card-container ${props.job.applied ? 'applied-true' : 'applied-false'} `}>
-            <h1> <Link to={`/job/${props.job._id}`}> {props.job.jobTitle} - {props.job.company}</Link></h1>
-            <p>{props.job.applied ? 'Applied!' : <button onClick={markApplied}>Mark as Applied</button>}</p>
-            <button onClick={deleteJob}>Delete</button>
+            <h3> <Link to={`/job/${props.job._id}`}> {props.job.jobTitle}</Link></h3>
+            <h4>{props.job.company}</h4>
+            <p>{props.job.applied ? 'Applied!' : <button className='brand-button' onClick={markApplied}>Mark as Applied</button>}</p>
+            <button className='brand-button' onClick={deleteJob}>Delete</button>
         </div>
     )
 }

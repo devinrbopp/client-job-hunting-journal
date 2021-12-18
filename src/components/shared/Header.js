@@ -21,11 +21,6 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
-			<Link to='change-password' style={linkStyle}>
-				Change Password
-			</Link>
-		</Nav.Link>
-		<Nav.Link>
 			<Link to='sign-out' style={linkStyle}>
 				Sign Out
 			</Link>
@@ -55,7 +50,7 @@ const alwaysOptions = (
 )
 
 const Header = ({ user, currentProfile }) => (
-	<Navbar bg='primary' variant='dark' expand='md'>
+	<Navbar id='navbar' bg='indigo' variant='dark' expand='md'>
 		<Navbar.Brand>
 		<img
 			src="/minmax-job-hunter-logo.png"

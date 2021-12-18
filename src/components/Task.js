@@ -8,12 +8,6 @@ function Task(props) {
      * DEFINE STATES *
      *****************/
 
-    const [taskArray, setTaskArray] = useState([])
-    const [taskList, setTaskList] = useState([
-        { taskName: 'Submit resume', deadline: '', notes: '' },
-        { taskName: 'Interview Prep', deadline: '', notes: '' },
-        { taskName: 'New thing', deadline: '', notes: '' }
-    ])
     const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '', owner: props.user._id, jobId: props.jobId })
 
     /********************
@@ -107,12 +101,12 @@ function Task(props) {
         }
         return (
             <div className='task-card'>
-                <h1>{task.taskName}</h1>
-                <h2 style={style} name='taskDeadline'>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h2>
+                <h4>{task.taskName}</h4>
+                <h6 style={style} name='taskDeadline'>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h6>
                 <textarea placeholder={'Take notes here. Notes are saved automatically.'} onChange={handleNotepad} className={task._id} name='notepad' id='' rows='10'>{task.notes}</textarea>
                 <br />
-                {task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
-                <button onClick={() => deleteTask(task)}>Delete Task</button>
+                {task.completed ? 'Completed' : <button className='brand-button' onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
+                <button className='brand-button' onClick={() => deleteTask(task)}>Delete Task</button>
             </div>
         )
     })
@@ -130,13 +124,17 @@ function Task(props) {
                         <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
                         <option value='Submit Resume' >Submit Resume</option>
                         <option value='Accept Offer' >Accept Offer</option>
-                        <option value='Other Misc Task' >Other Misc Task</option>
+                        <option value='Interview' >Interview</option>
+                        <option value='Follow Up' >Follow Up</option>
+                        <option value='Submit Cover Letter' >Submit Cover Letter</option>
+                        <option value='Send References' >Send References</option>
+                        <option value='Other Task' >Other Task</option>
                     </select>
                     <div id='task-deadline-input' className='task-input'>
                         <label htmlFor='deadline' className='task-form-label' >Deadline:  </label>
                         <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
                     </div>
-                    <button className='task-input' id='task-submit' type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
+                    <button className='task-input brand-button' id='task-submit' type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
                 </form>
             </div>
             <hr />

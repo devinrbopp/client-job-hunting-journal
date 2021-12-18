@@ -40,8 +40,8 @@ const Home = (props) => {
         }
 		return (
 			<div>
-				<h1><Link to={`job/${task.jobId._id}`}>{task.taskName}</Link> - <small>{task.jobId.jobTitle}, {task.jobId.company}</small></h1>
-				<h2 style={style}>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h2>
+				<h4><Link to={`job/${task.jobId._id}`}>{task.taskName}</Link> - <small>{task.jobId.jobTitle}, {task.jobId.company}</small></h4>
+				<h6 style={style}>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h6>
 
 				<p className='task-notes'>Notes: {task.notes}</p>
 			</div>
@@ -50,7 +50,12 @@ const Home = (props) => {
 
 	return (
 		<>
-			{props.user ? <h1>Upcoming Tasks:</h1> : <h1>Welcome</h1>}
+			{props.user ? <h1>Upcoming Tasks:</h1> : 
+			<div id='hero-welcome'>
+				<h3 id='hero-text-min'>Minimize your stress.</h3>
+				<h1 id='hero-text-max'>Maximize your efficiency.</h1>
+				<p id='hero-text-p'>Launch your job search in an organized way to keep your stress levels minimized, and your efficiency levels maximized. Click sign up to get started.</p>
+			</div>}
 			<div className='upcoming-tasks-container'>
 				{upcomingTasks}
 			</div>
