@@ -1,6 +1,6 @@
 function JobForm(props) {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form id='job-form' onSubmit={props.handleSubmit}>
             <div className='job-form-input'>
                 <label className='job-form-label' htmlFor='jobTitle'>Job Title: </label>
                 <input className='job-form-field' type='text' name='jobTitle' id='jobTitle' onChange={props.handleChange} value={props.job.jobTitle}required />
@@ -18,7 +18,7 @@ function JobForm(props) {
                 <input className='job-form-field' type='text' name='jobDescription' id='jobDescription' onChange={props.handleChange} value={props.job.jobDescription} />
             </div>
             <div className='job-form-input'>
-                <label className='job-form-label' htmlFor='applied'>Applied </label>
+                <label id='applied-label' className='job-form-label' htmlFor='applied'>Applied </label>
                 <input className='job-form-field' type='checkbox' name='applied' id='applied' onChange={props.handleCheck} checked={props.job.applied ? 'checked' : ''} />
             </div>
             <input type='submit' value='submit' />

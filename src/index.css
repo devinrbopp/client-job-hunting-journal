@@ -45,25 +45,41 @@
   padding: 0;
 }
 
+#job-form {
+  margin-bottom: 15px
+}
+
 .job-form-input {
-  /* margin: 10px 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: end; */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  margin: 5px 0;
 }
 
 .job-form-label {
-  /* margin-right: 5px; */
-  grid-column-start: 0;
-  grid-column-end: 1;
+  min-width: 135px;
 }
 
 .job-form-field {
-  /* justify-self: start; */
-  grid-column-start: 1;
-  grid-column-end: 2;
+  width: 80%;
+  max-width: 300px;
+  text-align: left
+}
+
+@media only screen and (max-width: 600px) {
+  .job-form-field {
+    display: block
+  }
+  #applied {
+    display: inline;
+    width: auto;
+  }
+  #applied-label {
+    min-width: 0;
+    width: auto;
+    padding-right: 5px;
+  }
+}
+
+#applied {
+  width: auto;
 }
 
 code {
@@ -82,5 +98,9 @@ textarea {
 }
 
 .task-notes {
+  white-space: pre-line;
+}
+
+.job-description {
   white-space: pre-line;
 }

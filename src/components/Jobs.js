@@ -79,7 +79,7 @@ function Jobs(props) {
                 <h2>Add a new job:</h2>
                 <JobForm handleCheck={handleCheck} handleChange={handleChange} job={newJob} handleSubmit={handleSubmit} />
             </div>
-
+            <hr />
             <div className='job-cards'>
                 {allJobs}
             </div>
