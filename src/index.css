@@ -120,6 +120,10 @@ textarea {
   white-space: pre-line;
 }
 
+.task-card {
+  margin-bottom: 10px;
+}
+
 #task-name-select {
   margin-left: 5px;
   height: 25px;
