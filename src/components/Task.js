@@ -125,6 +125,7 @@ function Task(props) {
         <div>
             <div className='task-form-container'>
                 <form onSubmit={handleSubmit}>
+                    <label hidden className='task-form-label'>Select</label>
                     <select className='task-input' id='task-name-select' name='taskName' value={newTask.taskName} onChange={handleChange} >
                         <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
                         <option value='Submit Resume' >Submit Resume</option>
@@ -132,12 +133,13 @@ function Task(props) {
                         <option value='Other Misc Task' >Other Misc Task</option>
                     </select>
                     <div id='task-deadline-input' className='task-input'>
-                        <label htmlFor='deadline'>Deadline:  </label>
+                        <label htmlFor='deadline' className='task-form-label' >Deadline:  </label>
                         <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
                     </div>
                     <button className='task-input' id='task-submit' type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
                 </form>
             </div>
+            <hr />
             <div className='task-cards'>
                 {tasks}
             </div>
