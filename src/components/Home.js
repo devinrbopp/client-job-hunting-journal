@@ -40,8 +40,8 @@ const Home = (props) => {
         }
 		return (
 			<div>
-				<h1><Link to={`job/${task.jobId._id}`}>{task.taskName}</Link> - <small>{task.jobId.jobTitle}, {task.jobId.company}</small></h1>
-				<h2 style={style}>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h2>
+				<h4><Link to={`job/${task.jobId._id}`}>{task.taskName}</Link> - <small>{task.jobId.jobTitle}, {task.jobId.company}</small></h4>
+				<h6 style={style}>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h6>
 
 				<p className='task-notes'>Notes: {task.notes}</p>
 			</div>

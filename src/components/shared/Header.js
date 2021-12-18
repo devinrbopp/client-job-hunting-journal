@@ -55,7 +55,7 @@ const alwaysOptions = (
 )
 
 const Header = ({ user, currentProfile }) => (
-	<Navbar bg='primary' variant='dark' expand='md'>
+	<Navbar id='navbar' bg='indigo' variant='dark' expand='md'>
 		<Navbar.Brand>
 		<img
 			src="/minmax-job-hunter-logo.png"

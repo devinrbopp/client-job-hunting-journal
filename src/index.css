@@ -21,6 +21,8 @@
   -moz-osx-font-smoothing: grayscale; */
 }
 
+
+
 .navbar-brand {
   font-family: 'Comfortaa', cursive;
   padding-left: 20px;
@@ -31,12 +33,16 @@
   margin: auto 15px;
 }
 
+#navbar {
+  background-color: #034D77;
+}
+
 .nav-link {
   font-family: 'Comfortaa', cursive;
 }
 
 .nav-link:hover {
-  background-color: black;
+  background-color: #046CA7;
 }
 
 #skill-ul{
@@ -83,13 +89,24 @@
   width: auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.job-cards {
+  display: flex;
+  gap: 20px 30px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.job-card-container {
+  border: black 1px solid;
+  padding: 10px;
+  border-radius: 5px;
+  width: 300px;
+  filter: drop-shadow(8px 8px 0 black);
+  background: wheat;
 }
 
 #footer {
-  background: #0b6efd;
+  background: #034D77;
   color: white;
   margin: 10px 0 0 0
 }
@@ -139,4 +156,14 @@ textarea {
 
 #logo {
   margin-right: 10px;
+}
+
+button {
+  background: #034D77;
+  color: white;
+  font-family: 'Comfortaa', cursive;
+  border: none;
+  border-radius: 20px;
+  filter: drop-shadow(2px 2px 0 black);
+
 }

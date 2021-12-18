@@ -2,10 +2,10 @@
 import React, { useState, Fragment, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import './index.css'
 import apiUrl from './apiConfig'
 import { Container, Row, Col } from 'react-bootstrap'
 import { propTypes } from 'react-bootstrap/esm/Image'
+import './index.css'
 
 
 

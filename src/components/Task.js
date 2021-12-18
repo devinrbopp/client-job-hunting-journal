@@ -107,8 +107,8 @@ function Task(props) {
         }
         return (
             <div className='task-card'>
-                <h1>{task.taskName}</h1>
-                <h2 style={style} name='taskDeadline'>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h2>
+                <h4>{task.taskName}</h4>
+                <h6 style={style} name='taskDeadline'>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h6>
                 <textarea placeholder={'Take notes here. Notes are saved automatically.'} onChange={handleNotepad} className={task._id} name='notepad' id='' rows='10'>{task.notes}</textarea>
                 <br />
                 {task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
