@@ -105,3 +105,11 @@ textarea {
 .job-description {
   white-space: pre-line;
 }
+
+.task-input {
+  margin: 5px 0;
+}
+
+#deadline {
+  margin-left: 5px;
+}

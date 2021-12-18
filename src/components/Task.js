@@ -125,15 +125,17 @@ function Task(props) {
         <div>
             <div className='task-form-container'>
                 <form onSubmit={handleSubmit}>
-                    <select name='taskName' value={newTask.taskName} onChange={handleChange} >
+                    <select className='task-input' id='task-name-select' name='taskName' value={newTask.taskName} onChange={handleChange} >
                         <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
                         <option value='Submit Resume' >Submit Resume</option>
                         <option value='Accept Offer' >Accept Offer</option>
                         <option value='Other Misc Task' >Other Misc Task</option>
-                    </select><br />
-                    <label htmlFor='deadline'>Deadline: </label>
-                    <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
-                    <button type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
+                    </select>
+                    <div id='task-deadline-input' className='task-input'>
+                        <label htmlFor='deadline'>Deadline:  </label>
+                        <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
+                    </div>
+                    <button className='task-input' id='task-submit' type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
                 </form>
             </div>
             <div className='task-cards'>
