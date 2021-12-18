@@ -111,8 +111,8 @@ function Task(props) {
                 <h6 style={style} name='taskDeadline'>Deadline: {dateFormat(task.deadline, 'dddd, mmmm dS, yyyy', true)}</h6>
                 <textarea placeholder={'Take notes here. Notes are saved automatically.'} onChange={handleNotepad} className={task._id} name='notepad' id='' rows='10'>{task.notes}</textarea>
                 <br />
-                {task.completed ? 'Completed' : <button onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
-                <button onClick={() => deleteTask(task)}>Delete Task</button>
+                {task.completed ? 'Completed' : <button className='brand-button' onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
+                <button className='brand-button' onClick={() => deleteTask(task)}>Delete Task</button>
             </div>
         )
     })
@@ -136,7 +136,7 @@ function Task(props) {
                         <label htmlFor='deadline' className='task-form-label' >Deadline:  </label>
                         <input type='date' name='deadline' id='deadline' value={newTask.deadline} onChange={handleChange} /><br />
                     </div>
-                    <button className='task-input' id='task-submit' type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
+                    <button className='task-input brand-button' id='task-submit' type='submit' value={`${newTask.taskName}`} onClick={handleSubmit} >Add Task</button>
                 </form>
             </div>
             <hr />

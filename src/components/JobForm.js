@@ -22,7 +22,7 @@ function JobForm(props) {
                 <label id='applied-label' className='job-form-label' htmlFor='applied'>Applied </label>
                 <input className='job-form-field' type='checkbox' name='applied' id='applied' onChange={props.handleCheck} checked={props.job.applied ? 'checked' : ''} />
             </div>
-            <input type='submit' value='submit' />
+            <input className='brand-button' type='submit' value='Submit' />
         </form>
     )
 }

@@ -7,7 +7,7 @@
 }
 
 .page-body {
-  /* font-family: 'Comfortaa', cursive; */
+  /* font-family: 'Comfortaa', sans-serif; */
   background-color: wheat;
   height: 100%;
   min-height: 80vh;
@@ -24,12 +24,12 @@
 
 
 .navbar-brand {
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Comfortaa', sans-serif;
   padding-left: 20px;
 }
 
 .navbar-text {
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Comfortaa', sans-serif;
   margin: auto 15px;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .nav-link {
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Comfortaa', sans-serif;
 }
 
 .nav-link:hover {
@@ -108,7 +108,8 @@
 #footer {
   background: #034D77;
   color: white;
-  margin: 10px 0 0 0
+  margin: 10px 0 0 0;
+  padding: 30px;
 }
 
 textarea {
@@ -158,12 +159,65 @@ textarea {
   margin-right: 10px;
 }
 
-button {
+.brand-button {
   background: #034D77;
   color: white;
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Comfortaa', sans-serif;
   border: none;
-  border-radius: 20px;
+  border-radius: 3px;
+  filter: drop-shadow(0 0 0 black);
+  font-size: .9em;
+  margin: 5px 3px 3px 0;
+  
+}
+
+.brand-button:hover {
+  filter: drop-shadow(2px 2px 0 black);
+}
+
+/* #brand-button {
+  background: #034D77;
+  color: white;
+  font-family: 'Comfortaa', sans-serif;
+  border: none;
+  border-radius: 3px;
+  filter: drop-shadow(0 0 0 black);
+  font-size: .9em; */
+/* } */
+
+#signup-button, #signout-button, #cancel-button, #changepassword-button, #signin-button {
+  background: #034D77;
+  color: white;
+  font-family: 'Comfortaa', sans-serif;
+  border: none;
+  border-radius: 3px;
+  filter: drop-shadow(0 0 0 black);
+  font-size: .9em;
+  margin: 5px 3px 3px 0;
+}
+
+#signup-button:hover, #signout-button:hover, #cancel-button:hover, #changepassword-button:hover, #signin-button:hover {
   filter: drop-shadow(2px 2px 0 black);
 
+}
+
+#hero-welcome {
+  margin: 125px 0 0 20px;
+}
+
+#hero-text-min {
+  font-size: 4vw;
+  font-family: 'Comfortaa', sans-serif;
+
+}
+
+#hero-text-max {
+  font-size: 7vw;
+  font-family: 'Comfortaa', sans-serif;
+
+}
+
+#hero-text-p {
+  font-size: 3vw;
+  font-family: 'Comfortaa', sans-serif;
 }

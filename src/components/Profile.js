@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import Task from './Task';
 import apiUrl from '../apiConfig'
 
@@ -127,7 +128,7 @@ function Profile(props) {
                     <label htmlFor='zipCode'>Zip Code</label>
                     <input onChange={handleChange} type='text' name='zipCode' id='zipCode' value={newProfile.zipCode} />
                 </div>
-                <input type='submit' value='submit' />
+                <input className='brand-button' type='submit' value='submit' />
             </form>
         )
     } 
@@ -147,7 +148,8 @@ function Profile(props) {
                     </ul>
                     <h4>Zip Code: {props.currentProfile.zipCode}</h4>
                     <h3>{props.currentProfile.interviewQuestions}</h3>
-                    <button onClick={editProfile}>Edit Profile</button>
+                    <button className='brand-button' onClick={editProfile}>Edit Profile</button>
+                    <Link to='../change-password'><button className='brand-button'>Change Password</button></Link>
                 </div>
             )
         } else {                    
@@ -165,7 +167,7 @@ function Profile(props) {
                         <label htmlFor='zipCode'>Zip Code</label>
                         <input onChange={handleChange} type='text' minLength='5' maxLength='5' name='zipCode' id='zipCode' value={newProfile.zipCode} />
                     </div>
-                    <input type='submit' value='submit' />
+                    <input className='brand-button' type='submit' value='submit' />
                 </form>)
         }
     }
