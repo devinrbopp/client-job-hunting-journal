@@ -167,7 +167,7 @@ function Profile(props) {
                         <label htmlFor='zipCode'>Zip Code</label>
                         <input onChange={handleChange} type='text' minLength='5' maxLength='5' name='zipCode' id='zipCode' value={newProfile.zipCode} />
                     </div>
-                    <input className='brand-button' type='submit' value='submit' />
+                    <input className='brand-button' type='submit' value='Submit' />
                 </form>)
         }
     }

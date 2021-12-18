@@ -8,12 +8,6 @@ function Task(props) {
      * DEFINE STATES *
      *****************/
 
-    const [taskArray, setTaskArray] = useState([])
-    const [taskList, setTaskList] = useState([
-        { taskName: 'Submit resume', deadline: '', notes: '' },
-        { taskName: 'Interview Prep', deadline: '', notes: '' },
-        { taskName: 'New thing', deadline: '', notes: '' }
-    ])
     const [newTask, setNewTask] = useState({ taskName: null, deadline: '', notes: '', owner: props.user._id, jobId: props.jobId })
 
     /********************
@@ -130,7 +124,11 @@ function Task(props) {
                         <option value={null} selected={newTask.taskName == null ? true : false} >--Select a Task--</option>
                         <option value='Submit Resume' >Submit Resume</option>
                         <option value='Accept Offer' >Accept Offer</option>
-                        <option value='Other Misc Task' >Other Misc Task</option>
+                        <option value='Interview' >Interview</option>
+                        <option value='Follow Up' >Follow Up</option>
+                        <option value='Submit Cover Letter' >Submit Cover Letter</option>
+                        <option value='Send References' >Send References</option>
+                        <option value='Other Task' >Other Task</option>
                     </select>
                     <div id='task-deadline-input' className='task-input'>
                         <label htmlFor='deadline' className='task-form-label' >Deadline:  </label>
