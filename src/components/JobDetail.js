@@ -113,7 +113,7 @@ function JobDetail(props) {
             <>
                 <div className='job-div'>
                     <h1>{currentJob[0].jobTitle} - {currentJob[0].company}</h1>
-                    <p className='job-description'>{currentJob[0].jobDescription}</p>
+                    <div className='job-description'>{currentJob[0].jobDescription}</div>
                     <p>Applied: {currentJob[0].applied ? 'Yes' : 'No'}</p>
                 </div>
                 <button onClick={editToggle}>Edit Job Details</button>

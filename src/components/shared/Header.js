@@ -58,7 +58,7 @@ const Header = ({ user, currentProfile }) => (
 	<Navbar bg='primary' variant='dark' expand='md'>
 		<Navbar.Brand>
             <Link to='/' style={linkStyle}>
-                Job Hunter
+                MinMax Job Hunter
             </Link>
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
