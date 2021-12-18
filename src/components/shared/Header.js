@@ -57,6 +57,14 @@ const alwaysOptions = (
 const Header = ({ user, currentProfile }) => (
 	<Navbar bg='primary' variant='dark' expand='md'>
 		<Navbar.Brand>
+		<img
+			src="/minmax-job-hunter-logo.png"
+			width="30"
+			height="30"
+			className="d-inline-block align-top"
+			alt="MinMax Job Hunter Logo"
+			id="logo"
+     	/>
             <Link to='/' style={linkStyle}>
                 MinMax Job Hunter
             </Link>
