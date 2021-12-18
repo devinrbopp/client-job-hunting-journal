@@ -4,6 +4,10 @@ import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import './index.css'
 import apiUrl from './apiConfig'
+import { Container, Row, Col } from 'react-bootstrap'
+import { propTypes } from 'react-bootstrap/esm/Image'
+
+
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
@@ -169,6 +173,13 @@ const App = () => {
 					deleteAlert={deleteAlert}
 				/>
 			))}
+			<Container id='footer' fluid>
+				<Row >
+					<Col>
+						<div>Made with love (and the correct number of curly brackets) by Jerry Yang, Shuzel Lide, Hannah Legros, and Devin Bopp.</div>
+					</Col>
+				</Row>
+			</Container>
 		</Fragment>
 	)
 }
