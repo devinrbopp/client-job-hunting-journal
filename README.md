@@ -6,6 +6,15 @@ Job Hunter is an app designed to help recent tech grads organize their job searc
 
 ![Home](Wireframe/homeScreen.png)
 
+## Installation
+- Fork and clone this repository
+- Fork and clone the API repository linked above
+- Run `npm install` on both
+- Run `brew tap mongodb/brew` to download MongoDB
+- Run `brew install mongodb-community@4.4` to install MongoDB
+- To start your servers, run `npm start` on the client terminal and `nodemon` on the API terminal.
+
+
 ## Profile
 The profile page displays the user's name, skills, and zipcode. 
 
