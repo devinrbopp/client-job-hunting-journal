@@ -1,4 +1,4 @@
-# Job Hunter
+# MinMax Job Hunter
 Job Hunter is an app designed to help recent tech grads organize their job search process. The app will have a page for the users profile, job listings, saved jobs, and details/task list. 
 
 [API Github](https://github.com/devinrbopp/job-hunting-journal-api)
