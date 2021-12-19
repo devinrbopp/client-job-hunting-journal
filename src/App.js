@@ -175,7 +175,7 @@ const App = () => {
 			<Container id='footer' fluid>
 				<Row >
 					<Col>
-						<div>Made with love (and the correct number of curly brackets) by Jerry Yang, Shuzel Lide, Hannah Legros, and Devin Bopp.</div>
+						<div>Made with love (and the correct number of curly brackets) by <a className='github-link' href='https://github.com/jyang1003' target='_blank'>Jerry Yang</a>, <a className='github-link' href='https://github.com/shuzel99' target='_blank'>Shuzel Lide</a>, <a className='github-link' href='https://github.com/hannahlegros' target='_blank'>Hannah Legros</a>, and <a className='github-link' href='https://github.com/devinrbopp' target='_blank'>Devin Bopp</a>.</div>
 					</Col>
 				</Row>
 			</Container>

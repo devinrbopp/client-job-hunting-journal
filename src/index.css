@@ -235,3 +235,11 @@ textarea {
   top: 30px;
   bottom:unset
 }
+
+.github-link {
+  color: white;
+}
+
+.github-link:hover {
+  color: wheat;
+}
