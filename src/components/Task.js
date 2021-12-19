@@ -107,6 +107,7 @@ function Task(props) {
                 <br />
                 {task.completed ? 'Completed' : <button className='brand-button' onClick={() => markAsCompleted(task)}>Mark as Completed</button>}
                 <button className='brand-button' onClick={() => deleteTask(task)}>Delete Task</button>
+                <hr />
             </div>
         )
     })
